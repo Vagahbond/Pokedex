@@ -9,6 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pokedex">
+        <activity
+            android:name=".pokemons.PokemonListActivity"
+            android:label="@string/title_pokemon_list"
+            android:theme="@style/Theme.Pokedex.NoActionBar"></activity>
+        <activity
+            android:name=".pokemons.PokemonDetailActivity"
+            android:label="@string/title_pokemon_detail"
+            android:parentActivityName=".pokemons.PokemonListActivity"
+            android:theme="@style/Theme.Pokedex.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dedistonks.pokedex.pokemons.PokemonListActivity" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
