@@ -13,9 +13,11 @@
             android:name=".objects.ObjectListActivity"
             android:label="@string/title_object_list"
             android:theme="@style/Theme.Pokedex.NoActionBar">
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".objects.ObjectDetailActivity"
@@ -27,9 +29,7 @@
                 android:value="com.dedistonks.pokedex.objects.ObjectListActivity" />
         </activity>
         <activity android:name=".MainActivity">
-            <intent-filter>
 
-            </intent-filter>
         </activity>
     </application>
 
