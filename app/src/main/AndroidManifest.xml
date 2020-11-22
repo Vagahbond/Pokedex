@@ -12,7 +12,11 @@
         <activity
             android:name=".objects.ObjectListActivity"
             android:label="@string/title_object_list"
-            android:theme="@style/Theme.Pokedex.NoActionBar"></activity>
+            android:theme="@style/Theme.Pokedex.NoActionBar">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </activity>
         <activity
             android:name=".objects.ObjectDetailActivity"
             android:label="@string/title_object_detail"
@@ -24,9 +28,7 @@
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
