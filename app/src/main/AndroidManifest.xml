@@ -22,6 +22,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dedistonks.pokedex.pokemons.PokemonListActivity" />
         </activity>
+        <activity
+            android:name=".objects.ObjectsListActivity"
+            android:label="@string/title_pokemon_list"
+            android:theme="@style/Theme.Pokedex.NoActionBar"></activity>
+        <activity
+            android:name=".objects.ObjectDetailActivity"
+            android:label="@string/title_object_detail"
+            android:parentActivityName=".objects.ObjectListActivity"
+            android:theme="@style/Theme.Pokedex.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dedistonks.pokedex.objects.ObjectListActivity" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
