@@ -12,7 +12,7 @@
         <activity
             android:name=".pokemons.PokemonListActivity"
             android:label="@string/title_pokemon_list"
-            android:theme="@style/Theme.Pokedex.NoActionBar"></activity>
+            android:theme="@style/Theme.Pokedex.NoActionBar"/>
         <activity
             android:name=".pokemons.PokemonDetailActivity"
             android:label="@string/title_pokemon_detail"
@@ -23,9 +23,9 @@
                 android:value="com.dedistonks.pokedex.pokemons.PokemonListActivity" />
         </activity>
         <activity
-            android:name=".objects.ObjectsListActivity"
+            android:name=".objects.ObjectListActivity"
             android:label="@string/title_pokemon_list"
-            android:theme="@style/Theme.Pokedex.NoActionBar"></activity>
+            android:theme="@style/Theme.Pokedex.NoActionBar"/>
         <activity
             android:name=".objects.ObjectDetailActivity"
             android:label="@string/title_object_detail"
