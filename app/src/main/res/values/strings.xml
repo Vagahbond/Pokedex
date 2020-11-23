@@ -6,5 +6,6 @@
 
     <string name="title_object_list">Objects</string>
     <string name="title_object_detail">Object Detail</string>
+    <string name="welcome_message">Welcome to the Pokedex</string>
 
 </resources>
