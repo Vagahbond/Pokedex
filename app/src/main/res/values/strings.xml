@@ -9,5 +9,7 @@
     <string name="title_object_list">Objects</string>
     <string name="title_object_detail">Object Detail</string>
     <string name="welcome_message">Welcome to the Pokedex</string>
+    <string name="pokemon_from_front">Pokemon from front</string>
+    <string name="pokemon_from_back">Pokemon from back</string>
 
 </resources>
