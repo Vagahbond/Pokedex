@@ -16,6 +16,9 @@ import com.dedistonks.pokedex.R
 
 import com.dedistonks.pokedex.pokemons.dummy.DummyContent
 
+import com.dedistonks.pokedex.api.PokeAPI
+import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
+
 /**
  * An activity representing a list of Pings. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -31,6 +34,8 @@ class PokemonListActivity : AppCompatActivity() {
      * device.
      */
     private var twoPane: Boolean = false
+
+    private val api = PokeAPI()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,27 +58,33 @@ class PokemonListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        setupRecyclerView(findViewById(R.id.pokemon_list))
+        fetchRecyclerViewData(findViewById(R.id.pokemon_list))
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
+    private fun fetchRecyclerViewData(recyclerView : RecyclerView) {
+        api.getPokemons { values ->
+            runOnUiThread {
+                recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, values, twoPane)
+            }
+        }
+
+
+
     }
 
     class SimpleItemRecyclerViewAdapter(private val parentActivity: PokemonListActivity,
-                                        private val values: List<DummyContent.DummyItem>,
+                                        private val values: List<NamedApiResource>,
                                         private val twoPane: Boolean) :
             RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
-
         private val onClickListener: View.OnClickListener
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as DummyContent.DummyItem
+                val item = v.tag as NamedApiResource
                 if (twoPane) {
                     val fragment = PokemonDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(PokemonDetailFragment.ARG_ITEM_ID, item.id)
+                            putInt(PokemonDetailFragment.ARG_ITEM_ID, item.id)
                         }
                     }
                     parentActivity.supportFragmentManager
@@ -97,8 +108,8 @@ class PokemonListActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
+            holder.idView.text = item.id.toString()
+            holder.contentView.text = item.name
 
             with(holder.itemView) {
                 tag = item

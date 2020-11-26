@@ -27,39 +27,47 @@
 
             <ImageView
                 android:id="@+id/ivPokemonBack"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/pokemon_from_front"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivPokemonShinyFront"
                 app:layout_constraintStart_toEndOf="@+id/ivPokemonFront"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/ivPokemonFront"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/pokemon_from_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivPokemonBack"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/ivPokemonShinyFront"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/pokemon_from_front"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivPokemonShinyBack"
                 app:layout_constraintStart_toEndOf="@+id/ivPokemonBack"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/ivPokemonShinyBack"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/pokemon_from_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivPokemonShinyFront"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
@@ -155,24 +163,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/ivType1"
+            <TextView
+                android:id="@+id/tvType1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_dialog_alert"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ivType2"
+                app:layout_constraintEnd_toStartOf="@+id/tvType2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/ivType2"
+            <TextView
+                android:id="@+id/tvType2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_dialog_alert"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivType1"
+                app:layout_constraintStart_toEndOf="@+id/tvType1"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
