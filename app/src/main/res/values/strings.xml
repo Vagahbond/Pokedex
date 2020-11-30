@@ -11,5 +11,8 @@
     <string name="welcome_message">Welcome to the Pokedex</string>
     <string name="pokemon_from_front">Pokemon from front</string>
     <string name="pokemon_from_back">Pokemon from back</string>
+    <string name="height">Height</string>
+    <string name="meters_indicator">m.</string>
+    <string name="height_property">Height: %1$s m</string>
 
 </resources>

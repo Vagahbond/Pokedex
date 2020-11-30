@@ -25,48 +25,50 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/ivPokemonBack"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:contentDescription="@string/pokemon_from_front"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ivPokemonShinyFront"
-                app:layout_constraintStart_toEndOf="@+id/ivPokemonFront"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/ivPokemonFront"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:contentDescription="@string/pokemon_from_back"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ivPokemonShinyFront"
                 app:layout_constraintEnd_toStartOf="@+id/ivPokemonBack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
+                android:id="@+id/ivPokemonBack"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/pokemon_from_front"
+                app:layout_constraintBottom_toTopOf="@id/ivPokemonShinyBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivPokemonFront"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+
+            <ImageView
                 android:id="@+id/ivPokemonShinyFront"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:contentDescription="@string/pokemon_from_front"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivPokemonShinyBack"
-                app:layout_constraintStart_toEndOf="@+id/ivPokemonBack"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPokemonFront"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/ivPokemonShinyBack"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:contentDescription="@string/pokemon_from_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivPokemonShinyFront"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPokemonBack"
                 tools:srcCompat="@tools:sample/avatars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
@@ -127,7 +129,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvWeight"
+                android:id="@+id/tvHeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/unloaded_data"
@@ -143,7 +145,7 @@
                 android:layout_marginEnd="138dp"
                 android:text="@string/unloaded_data"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvWeight"
+                app:layout_constraintEnd_toStartOf="@+id/tvHeight"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
