@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.dedistonks.pokedex.R
 
-import com.dedistonks.pokedex.pokemons.dummy.DummyContent
 
 import com.dedistonks.pokedex.api.PokeAPI
 import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
@@ -64,7 +63,7 @@ class PokemonListActivity : AppCompatActivity() {
     private fun fetchRecyclerViewData(recyclerView : RecyclerView) {
         api.getPokemons { values ->
             runOnUiThread {
-                recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, values, twoPane)
+                recyclerView.adapter = PokemonRecyclerViewAdapter(this, values, twoPane)
             }
         }
 
@@ -72,10 +71,10 @@ class PokemonListActivity : AppCompatActivity() {
 
     }
 
-    class SimpleItemRecyclerViewAdapter(private val parentActivity: PokemonListActivity,
-                                        private val values: List<NamedApiResource>,
-                                        private val twoPane: Boolean) :
-            RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+    class PokemonRecyclerViewAdapter(private val parentActivity: PokemonListActivity,
+                                     private val values: List<NamedApiResource>,
+                                     private val twoPane: Boolean) :
+            RecyclerView.Adapter<PokemonRecyclerViewAdapter.ViewHolder>() {
         private val onClickListener: View.OnClickListener
 
         init {
