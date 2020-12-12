@@ -4,6 +4,7 @@ import com.dedistonks.pokedex.utils.Thread
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient
 import me.sargunvohra.lib.pokekotlin.model.Item
 import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
+import java.util.*
 
 class PokeAPI {
     private val api = PokeApiClient()
@@ -56,10 +57,14 @@ class PokeAPI {
             val pokedex = api.getPokedex(id)
             val evolutions = api.getEvolutionChain(id)
 
+            val findDescription =
+                { language: String -> pokedex.descriptions.find { description -> description.language.name == language }?.description }
+
             val dto = PokemonDTO(
                 id = pokemon.id,
                 name = pokemon.name,
-                description = pokedex.descriptions.find { description -> description.language.name == "en" }!!.description,
+                description = findDescription(Locale.getDefault().language)
+                    ?: findDescription("en"),
                 height = pokemon.height,
                 abilities = pokemon.abilities.map { ability -> ability.ability.name },
                 types = pokemon.types.map { type -> type.type.name },
