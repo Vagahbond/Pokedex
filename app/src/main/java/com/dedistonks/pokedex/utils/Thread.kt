@@ -8,7 +8,12 @@ class Thread {
     companion object {
         @JvmStatic
         fun thread(callback: () -> Unit) {
-            GlobalScope.launch(Dispatchers.IO) { callback() }
+            try {
+                GlobalScope.launch(Dispatchers.IO) { callback() }
+
+            } catch(error: Throwable) {
+                error.printStackTrace()
+            }
         }
     }
 }

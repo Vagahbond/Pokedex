@@ -2,6 +2,7 @@ package com.dedistonks.pokedex.pokemons
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.dedistonks.pokedex.R
+import com.dedistonks.pokedex.api.PokeAPI
 
 import com.dedistonks.pokedex.pokemons.dummy.DummyContent
 
@@ -26,6 +28,9 @@ import com.dedistonks.pokedex.pokemons.dummy.DummyContent
  */
 class PokemonListActivity : AppCompatActivity() {
 
+    private val api: PokeAPI = PokeAPI()
+
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -35,6 +40,9 @@ class PokemonListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokemon_list)
+
+        api.getPokemons(0, 6){ pokemons -> Log.d("pokemonsdata", pokemons.toString()) }
+
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
