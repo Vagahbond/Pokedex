@@ -21,5 +21,5 @@ interface PokemonDao {
     fun insertAll(vararg pokemon: Pokemon)
 
     @Delete
-    fun delete(user: Pokemon)
+    fun delete(pokemon: Pokemon)
 }

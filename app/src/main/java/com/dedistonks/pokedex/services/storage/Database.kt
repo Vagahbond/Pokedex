@@ -1,3 +1,5 @@
+package com.dedistonks.pokedex.services.storage
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room

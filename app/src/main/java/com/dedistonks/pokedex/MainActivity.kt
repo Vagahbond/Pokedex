@@ -4,13 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
-import androidx.room.Database
 import com.dedistonks.pokedex.Adapters.Pokemon.PokemonEntityAdapter
 import com.dedistonks.pokedex.api.PokeAPI
 import com.dedistonks.pokedex.objects.ObjectListActivity
 import com.dedistonks.pokedex.pokemons.PokemonListActivity
+import com.dedistonks.pokedex.services.storage.AppDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,13 +23,11 @@ class MainActivity : AppCompatActivity() {
 
 
         api.getPokemons(0, 6){ pokemons ->
-            Log.d("teeeest", pokemons.toString())
             pokemons.forEach { pokemon ->
-                Log.d("tetete", pokemon.toString())
-
-//                val pokemon =  pokemonEntityAdapter.adapt(pokemon as PokeAPI.PokemonDTO)
-//                Log.d("teeeest", pokemon.toString())
-//                AppDatabase.getInstance(this.applicationContext).pokemonDao().insertAll(pokemon)
+                api.getPokemon(pokemon.id) { pokemonDTO ->
+                    val p = pokemonEntityAdapter.adapt(pokemonDTO)
+                    AppDatabase.getInstance(this.applicationContext).pokemonDao().insertAll(p)
+                }
             }
         }
 
