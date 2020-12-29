@@ -24,9 +24,12 @@ class MainActivity : AppCompatActivity() {
 
         api.getPokemons(0, 6){ pokemons ->
             pokemons.forEach { pokemon ->
-                api.getPokemon(pokemon.id) { pokemonDTO ->
-                    val p = pokemonEntityAdapter.adapt(pokemonDTO)
-                    AppDatabase.getInstance(this.applicationContext).pokemonDao().insertAll(p)
+                val pokemonVerification = AppDatabase.getInstance(this.applicationContext).pokemonDao().loadAllByIds(arrayListOf(pokemon.id))
+
+                if(pokemonVerification.isEmpty()) {
+                    api.getPokemon(pokemon.id) { pokemonDTO ->
+                        AppDatabase.getInstance(this.applicationContext).pokemonDao().insertAll(pokemonEntityAdapter.adapt(pokemonDTO))
+                    }
                 }
             }
         }

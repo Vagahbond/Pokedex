@@ -28,7 +28,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pokemon_detail)
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
-        api.getPokemons(0, 6){ pokemons -> Log.d("pokemonsdata", pokemons.toString()) }
+        api.getPokemons(0, 6) { pokemons -> Log.d("pokemonsdata", pokemons.toString()) }
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)

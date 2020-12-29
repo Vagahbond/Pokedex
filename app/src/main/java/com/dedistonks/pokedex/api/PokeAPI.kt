@@ -1,12 +1,19 @@
 package com.dedistonks.pokedex.api
 
+import android.content.Context
+import android.util.Log
+import com.dedistonks.pokedex.Adapters.Pokemon.PokemonEntityAdapter
+import com.dedistonks.pokedex.services.storage.AppDatabase
+import com.dedistonks.pokedex.services.storage.dao.PokemonDao
 import com.dedistonks.pokedex.utils.Thread
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient
+import me.sargunvohra.lib.pokekotlin.model.ApiResource
 import me.sargunvohra.lib.pokekotlin.model.Item
 import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
 
 class PokeAPI {
     private val api = PokeApiClient()
+    private val pokemonEntityAdapter = PokemonEntityAdapter()
 
     fun getItems(offset: Int = 0, limit: Int = 5, callback: (List<NamedApiResource>) -> Unit) {
         Thread.thread {
@@ -46,6 +53,8 @@ class PokeAPI {
     fun getPokemons(offset: Int = 0, limit: Int = 5, callback: (List<NamedApiResource>) -> Unit) {
         Thread.thread {
             val items = api.getPokemonList(offset, limit)
+            Log.d("hoho", items.results.toString())
+
             callback(items.results)
         }
     }

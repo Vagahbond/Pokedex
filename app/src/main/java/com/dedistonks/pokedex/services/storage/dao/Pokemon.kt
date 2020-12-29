@@ -12,7 +12,7 @@ interface PokemonDao {
     fun getAll(): List<Pokemon>
 
     @Query("SELECT * FROM pokemon WHERE id IN (:pokemonIds)")
-    fun loadAllByIds(pokemonIds: IntArray): List<Pokemon>
+    fun loadAllByIds(pokemonIds: List<Int>): List<Pokemon>
 
     @Query("SELECT * FROM pokemon WHERE name LIKE :name")
     fun findByName(name: String): Pokemon
