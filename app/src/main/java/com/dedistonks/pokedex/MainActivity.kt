@@ -9,30 +9,16 @@ import com.dedistonks.pokedex.Adapters.Pokemon.PokemonEntityAdapter
 import com.dedistonks.pokedex.api.PokeAPI
 import com.dedistonks.pokedex.objects.ObjectListActivity
 import com.dedistonks.pokedex.pokemons.PokemonListActivity
-import com.dedistonks.pokedex.services.storage.AppDatabase
+import com.dedistonks.pokedex.services.DataService
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
-    private val api: PokeAPI = PokeAPI()
-    private val pokemonEntityAdapter: PokemonEntityAdapter = PokemonEntityAdapter()
+    private val dataService: DataService = DataService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-
-        api.getPokemons(0, 6){ pokemons ->
-            pokemons.forEach { pokemon ->
-                val pokemonVerification = AppDatabase.getInstance(this.applicationContext).pokemonDao().loadAllByIds(arrayListOf(pokemon.id))
-
-                if(pokemonVerification.isEmpty()) {
-                    api.getPokemon(pokemon.id) { pokemonDTO ->
-                        AppDatabase.getInstance(this.applicationContext).pokemonDao().insertAll(pokemonEntityAdapter.adapt(pokemonDTO))
-                    }
-                }
-            }
-        }
 
         val navToPokemonsButton : Button = findViewById(R.id.btPokemons)
         val navToObjectsButton : Button = findViewById(R.id.btObjects)

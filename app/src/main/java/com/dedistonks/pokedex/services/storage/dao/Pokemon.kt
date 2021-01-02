@@ -22,4 +22,7 @@ interface PokemonDao {
 
     @Delete
     fun delete(pokemon: Pokemon)
+
+    @Query("DELETE FROM pokemon")
+    fun nukePokemons()
 }
