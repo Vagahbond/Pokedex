@@ -19,6 +19,4 @@ class PokemonDtoAdapter : Adapter<Pokemon, PokeAPI.PokemonDTO> {
             source.games
         )
     }
-
-
 }

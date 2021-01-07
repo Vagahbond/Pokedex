@@ -36,10 +36,18 @@ class DataService {
         }
     }
 
-    private fun getPokemonsFromDatabase(offset: Int, limit: Int, context: Context, callback: (List<NamedApiResource>) -> Unit) {
+    private fun getPokemonsFromDatabase(
+        offset: Int,
+        limit: Int,
+        context: Context,
+        callback: (List<NamedApiResource>) -> Unit
+    ) {
         thread {
             val pokemonDao = AppDatabase.getInstance(context).pokemonDao()
-            callback(pokemonDao.loadAllByIds((offset..limit).toList()).map(namedApiResourceAdapter::adapt))
+            callback(
+                pokemonDao.loadAllByIds((offset..limit).toList())
+                    .map(namedApiResourceAdapter::adapt)
+            )
         }
     }
 
@@ -53,15 +61,22 @@ class DataService {
     }
 
 
-
-    private fun getPokemonDTOFromApi(id: Int, context: Context, callback: (PokeAPI.PokemonDTO) -> Unit) {
+    private fun getPokemonDTOFromApi(
+        id: Int,
+        context: Context,
+        callback: (PokeAPI.PokemonDTO) -> Unit
+    ) {
         api.getPokemon(id) {
             insertOnInexistantPokemon(id, context)
             callback(it)
         }
     }
 
-    private fun getPokemonDTOFromDatabase(id: Int, context: Context, callback: (PokeAPI.PokemonDTO?) -> Unit) {
+    private fun getPokemonDTOFromDatabase(
+        id: Int,
+        context: Context,
+        callback: (PokeAPI.PokemonDTO?) -> Unit
+    ) {
         thread {
             val pokemonDao = AppDatabase.getInstance(context).pokemonDao()
 
