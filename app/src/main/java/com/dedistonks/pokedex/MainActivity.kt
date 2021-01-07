@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        dataService
-
         val navToPokemonsButton : Button = findViewById(R.id.btPokemons)
         val navToObjectsButton : Button = findViewById(R.id.btObjects)
 
