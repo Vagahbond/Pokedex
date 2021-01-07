@@ -36,6 +36,13 @@ class DataService {
         }
     }
 
+    fun getItem(id: Int, callback: (PokeAPI.ItemDTO) -> Unit) {
+        Log.d("vou", " ya")
+        api.getItem(id) { pokemonItemDTO ->
+            callback(pokemonItemDTO)
+        }
+    }
+
     private fun getPokemonsFromDatabase(
         offset: Int,
         limit: Int,

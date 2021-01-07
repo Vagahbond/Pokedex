@@ -1,12 +1,13 @@
 package com.dedistonks.pokedex.api
 
 import com.dedistonks.pokedex.Adapters.Pokemon.PokemonEntityAdapter
+import com.dedistonks.pokedex.Adapters.PokemonItem.PokemonItemDTOAdapter
 import com.dedistonks.pokedex.utils.Thread
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient
-import me.sargunvohra.lib.pokekotlin.model.Item
 import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
 
 class PokeAPI {
+    private val itemDTOAdapter = PokemonItemDTOAdapter()
     private val api = PokeApiClient()
     private val pokemonEntityAdapter = PokemonEntityAdapter()
 
@@ -17,10 +18,9 @@ class PokeAPI {
         }
     }
 
-    fun getItem(id: Int, callback: (Item) -> Unit) {
+    fun getItem(id: Int, callback: (ItemDTO) -> Unit) {
         Thread.thread {
-            val item = api.getItem(id)
-            callback(item)
+            callback(itemDTOAdapter.adapt(api.getItem(id)))
         }
     }
 
@@ -43,6 +43,15 @@ class PokeAPI {
         val sprites: PokemonSpritesDTO?,
         val evolutions: List<PokemonEvolutionDTO?>,
         val games: List<String?>,
+    )
+
+    data class ItemDTO(
+        val id: Int,
+        val name: String,
+        val category: String,
+        val effects: List<String?>,
+        val spriteUrl: String?,
+        val description: String,
     )
 
     fun getPokemons(offset: Int = 0, limit: Int = 5, callback: (List<NamedApiResource>) -> Unit) {

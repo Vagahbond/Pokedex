@@ -1,6 +1,5 @@
 package com.dedistonks.pokedex.Adapters.Pokemon
 
-import android.util.Log
 import com.dedistonks.pokedex.Adapters.Adapter
 import com.dedistonks.pokedex.api.PokeAPI
 import com.dedistonks.pokedex.services.storage.entities.Pokemon
