@@ -12,13 +12,16 @@ import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
 import kotlin.concurrent.thread
 
 class DataService {
-    private val pokemonItemAdapter = PokemonItemAdapter()
-    private val pokemonEntityAdapter = PokemonEntityAdapter()
     private val api = PokeAPI()
+
     private val connectionService = ConnectionService()
+
+    private val pokemonItemAdapter = PokemonItemAdapter()
+    private val itemApiResourceAdapter = ItemNamedApiRessourceAdapter()
+
+    private val pokemonEntityAdapter = PokemonEntityAdapter()
     private val pokemonDtoAdapter = PokemonDtoAdapter()
     private val pokemonNamedApiResourceAdapter = PokemonNamedApiResourceAdapter()
-    private val itemApiResourceAdapter = ItemNamedApiRessourceAdapter()
 
     fun nukePokemons(context: Context) {
         val pokemonDao = AppDatabase.getInstance(context).pokemonDao()
@@ -36,7 +39,7 @@ class DataService {
         context: Context,
         callback: (List<NamedApiResource>) -> Unit
     ) {
-        if (connectionService.hasUserInternet(context)) {
+        if (connectionService.hasInternetAccess(context)) {
             getPokemonsFromApi(offset, limit, context, callback)
         } else {
             getPokemonsFromDatabase(offset, limit, context, callback)
@@ -60,7 +63,7 @@ class DataService {
     }
 
     fun getPokemonDTO(id: Int, context: Context, callback: (PokeAPI.PokemonDTO?) -> Unit) {
-        if (connectionService.hasUserInternet(context)) {
+        if (connectionService.hasInternetAccess(context)) {
             getPokemonDTOFromApi(id, context, callback)
         } else {
             getPokemonDTOFromDatabase(id, context, callback)
@@ -129,7 +132,7 @@ class DataService {
         context: Context,
         callback: (List<NamedApiResource>) -> Unit
     ) {
-        if (connectionService.hasUserInternet(context)) {
+        if (connectionService.hasInternetAccess(context)) {
             getItemsFromApi(offset, limit, context, callback)
         } else {
             getItemsFromDatabase(offset, limit, context, callback)
@@ -178,7 +181,7 @@ class DataService {
     }
 
     fun getItemDTO(id: Int, context: Context, callback: (PokeAPI.PokemonItemDTO?) -> Unit) {
-        if (this.connectionService.hasUserInternet(context)) {
+        if (this.connectionService.hasInternetAccess(context)) {
             getItemDtoFromApi(id, context, callback);
         } else {
             getItemDtoFromDatabase(id, context, callback)
@@ -192,7 +195,6 @@ class DataService {
     ) {
         thread {
             val pokemonItemDao = AppDatabase.getInstance(context).pokemonItemDao()
-
             val pokemonItem = pokemonItemDao.loadAllByIds(arrayListOf(id))
             if (!pokemonItem.isEmpty()) {
                 callback(
