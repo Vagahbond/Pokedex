@@ -79,15 +79,15 @@ class PokeAPI {
                     frontShiny = pokemon.sprites.frontShiny,
                 ),
                 evolutions = evolutions.chain.evolvesTo.map { to ->
-                    val pokemon = api.getPokemon(to.species.id)
+                    val pokemonEvolution = api.getPokemon(to.species.id)
 
                     PokemonEvolutionDTO(
-                        name = pokemon.name,
+                        name = pokemonEvolution.name,
                         sprites = PokemonSpritesDTO(
-                            back = pokemon.sprites.backDefault,
-                            front = pokemon.sprites.frontDefault,
-                            backShiny = pokemon.sprites.backShiny,
-                            frontShiny = pokemon.sprites.frontShiny,
+                            back = pokemonEvolution.sprites.backDefault,
+                            front = pokemonEvolution.sprites.frontDefault,
+                            backShiny = pokemonEvolution.sprites.backShiny,
+                            frontShiny = pokemonEvolution.sprites.frontShiny,
                         ),
                     )
                 },
