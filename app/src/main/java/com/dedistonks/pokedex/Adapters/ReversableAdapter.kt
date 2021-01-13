@@ -1,6 +1,5 @@
 package com.dedistonks.pokedex.Adapters
 
-interface ReversableAdapter <I, T> {
-    fun adapt(source: I): T
+interface ReversableAdapter <I, T> : Adapter<I, T>{
     fun reverseAdapt(source: T): I
 }
