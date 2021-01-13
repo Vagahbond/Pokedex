@@ -1,8 +1,7 @@
 package com.dedistonks.pokedex.services
 
 import android.content.Context
-import com.dedistonks.pokedex.Adapters.Pokemon.PokemonDtoAdapter
-import com.dedistonks.pokedex.Adapters.Pokemon.PokemonEntityAdapter
+import com.dedistonks.pokedex.Adapters.Pokemon.PokemonAdapter
 import com.dedistonks.pokedex.Adapters.Pokemon.PokemonNamedApiResourceAdapter
 import com.dedistonks.pokedex.Adapters.PokemonItem.ItemNamedApiRessourceAdapter
 import com.dedistonks.pokedex.Adapters.PokemonItem.PokemonItemAdapter
@@ -19,8 +18,7 @@ class DataService {
     private val pokemonItemAdapter = PokemonItemAdapter()
     private val itemApiResourceAdapter = ItemNamedApiRessourceAdapter()
 
-    private val pokemonEntityAdapter = PokemonEntityAdapter()
-    private val pokemonDtoAdapter = PokemonDtoAdapter()
+    private val pokemonAdapter = PokemonAdapter()
     private val pokemonNamedApiResourceAdapter = PokemonNamedApiResourceAdapter()
 
     fun nukePokemons(context: Context) {
@@ -92,7 +90,7 @@ class DataService {
 
             val pokemon = pokemonDao.loadAllByIds(arrayListOf(id))
             if (!pokemon.isEmpty()) {
-                callback(pokemonDtoAdapter.adapt(pokemon[0]))
+                callback(pokemonAdapter.reverseAdapt(pokemon[0]))
             }
 
             callback(null)
@@ -121,7 +119,7 @@ class DataService {
         if (pokemonVerification.isEmpty()) {
             api.getPokemon(id) { pokemonDTO ->
                 AppDatabase.getInstance(context).pokemonDao()
-                    .insertAll(pokemonEntityAdapter.adapt(pokemonDTO))
+                    .insertAll(pokemonAdapter.adapt(pokemonDTO))
             }
         }
     }
