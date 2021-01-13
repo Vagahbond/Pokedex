@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        dataService.getItem(5) {
+        dataService.getItems(0, 5, this.applicationContext) {
             Log.d("doggo", it.toString())
         }
 

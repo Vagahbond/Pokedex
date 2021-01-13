@@ -4,9 +4,9 @@ import com.dedistonks.pokedex.Adapters.Adapter
 import com.dedistonks.pokedex.api.PokeAPI
 import me.sargunvohra.lib.pokekotlin.model.Item
 
-class PokemonItemDTOAdapter : Adapter<Item, PokeAPI.ItemDTO> {
-    override fun adapt(source: Item): PokeAPI.ItemDTO {
-        return PokeAPI.ItemDTO(
+class PokemonItemDTOAdapter : Adapter<Item, PokeAPI.PokemonItemDTO> {
+    override fun adapt(source: Item): PokeAPI.PokemonItemDTO {
+        return PokeAPI.PokemonItemDTO(
                 id = source.id,
                 name = if(source.names.filter { name -> name.language.name == "en" }.isNotEmpty())
                     source.names.filter { name -> name.language.name == "en" }[0].name

@@ -1,25 +1,33 @@
 package com.dedistonks.pokedex.services
 
 import android.content.Context
-import android.util.Log
-import com.dedistonks.pokedex.Adapters.Pokemon.NamedApiResourceAdapter
 import com.dedistonks.pokedex.Adapters.Pokemon.PokemonDtoAdapter
 import com.dedistonks.pokedex.Adapters.Pokemon.PokemonEntityAdapter
+import com.dedistonks.pokedex.Adapters.Pokemon.PokemonNamedApiResourceAdapter
+import com.dedistonks.pokedex.Adapters.PokemonItem.ItemNamedApiRessourceAdapter
+import com.dedistonks.pokedex.Adapters.PokemonItem.PokemonItemAdapter
 import com.dedistonks.pokedex.api.PokeAPI
 import com.dedistonks.pokedex.services.storage.AppDatabase
 import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
 import kotlin.concurrent.thread
 
 class DataService {
-    private val pokemonEntityAdapter = PokemonEntityAdapter();
+    private val pokemonItemAdapter = PokemonItemAdapter()
+    private val pokemonEntityAdapter = PokemonEntityAdapter()
     private val api = PokeAPI()
     private val connectionService = ConnectionService()
     private val pokemonDtoAdapter = PokemonDtoAdapter()
-    private val namedApiResourceAdapter = NamedApiResourceAdapter()
+    private val pokemonNamedApiResourceAdapter = PokemonNamedApiResourceAdapter()
+    private val itemApiResourceAdapter = ItemNamedApiRessourceAdapter()
 
     fun nukePokemons(context: Context) {
         val pokemonDao = AppDatabase.getInstance(context).pokemonDao()
         pokemonDao.nukePokemons()
+    }
+
+    fun nukesPokemonItems(context: Context) {
+        val pokemonItemDao = AppDatabase.getInstance(context).pokemonItemDao()
+        pokemonItemDao.nukePokemonItems()
     }
 
     fun getPokemons(
@@ -36,13 +44,6 @@ class DataService {
         }
     }
 
-    fun getItem(id: Int, callback: (PokeAPI.ItemDTO) -> Unit) {
-        Log.d("vou", " ya")
-        api.getItem(id) { pokemonItemDTO ->
-            callback(pokemonItemDTO)
-        }
-    }
-
     private fun getPokemonsFromDatabase(
         offset: Int,
         limit: Int,
@@ -53,13 +54,12 @@ class DataService {
             val pokemonDao = AppDatabase.getInstance(context).pokemonDao()
             callback(
                 pokemonDao.loadAllByIds((offset..limit).toList())
-                    .map(namedApiResourceAdapter::adapt)
+                    .map(pokemonNamedApiResourceAdapter::adapt)
             )
         }
     }
 
     fun getPokemonDTO(id: Int, context: Context, callback: (PokeAPI.PokemonDTO?) -> Unit) {
-
         if (connectionService.hasUserInternet(context)) {
             getPokemonDTOFromApi(id, context, callback)
         } else {
@@ -102,7 +102,7 @@ class DataService {
         limit: Int = 5,
         context: Context,
         callback: (List<NamedApiResource>) -> Unit
-    ): Unit {
+    ) {
         api.getPokemons(offset, limit) { pokemons ->
             pokemons.forEach { pokemon ->
                 insertOnInexistantPokemon(pokemon.id, context)
@@ -120,6 +120,105 @@ class DataService {
                 AppDatabase.getInstance(context).pokemonDao()
                     .insertAll(pokemonEntityAdapter.adapt(pokemonDTO))
             }
+        }
+    }
+
+    fun getItems(
+        offset: Int = 0,
+        limit: Int = 5,
+        context: Context,
+        callback: (List<NamedApiResource>) -> Unit
+    ) {
+        if (connectionService.hasUserInternet(context)) {
+            getItemsFromApi(offset, limit, context, callback)
+        } else {
+            getItemsFromDatabase(offset, limit, context, callback)
+        }
+    }
+
+    private fun getItemsFromDatabase(
+        offset: Int,
+        limit: Int,
+        context: Context,
+        callback: (List<NamedApiResource>) -> Unit
+    ) {
+        thread {
+            callback(
+                AppDatabase.getInstance(context).pokemonItemDao()
+                    .loadAllByIds((offset..limit).toList())
+                    .map(itemApiResourceAdapter::adapt)
+            )
+        }
+    }
+
+    private fun getItemsFromApi(
+        offset: Int,
+        limit: Int,
+        context: Context,
+        callback: (List<NamedApiResource>) -> Unit
+    ) {
+        api.getItems(offset, limit) { pokemonItems ->
+            pokemonItems.forEach { pokemonItem ->
+                insertOnInexistantItem(pokemonItem.id, context)
+                callback(pokemonItems)
+            }
+
+        }
+    }
+
+    private fun insertOnInexistantItem(id: Int, context: Context) {
+        val pokemonItemDao = AppDatabase.getInstance(context).pokemonItemDao()
+        val pokemonItemVerification = pokemonItemDao.loadAllByIds(listOf(id))
+
+        if (pokemonItemVerification.isEmpty()) {
+            api.getItem(id) { pokemonItemDTO ->
+                pokemonItemDao.insertAll(pokemonItemAdapter.adapt(pokemonItemDTO))
+            }
+        }
+    }
+
+    fun getItemDTO(id: Int, context: Context, callback: (PokeAPI.PokemonItemDTO?) -> Unit) {
+        if (this.connectionService.hasUserInternet(context)) {
+            getItemDtoFromApi(id, context, callback);
+        } else {
+            getItemDtoFromDatabase(id, context, callback)
+        }
+    }
+
+    private fun getItemDtoFromDatabase(
+        id: Int,
+        context: Context,
+        callback: (PokeAPI.PokemonItemDTO?) -> Unit
+    ) {
+        thread {
+            val pokemonItemDao = AppDatabase.getInstance(context).pokemonItemDao()
+
+            val pokemonItem = pokemonItemDao.loadAllByIds(arrayListOf(id))
+            if (!pokemonItem.isEmpty()) {
+                callback(
+                    PokeAPI.PokemonItemDTO(
+                        pokemonItem[0].id,
+                        pokemonItem[0].name,
+                        pokemonItem[0].category,
+                        pokemonItem[0].effects,
+                        pokemonItem[0].spriteUrl,
+                        pokemonItem[0].description,
+                    )
+                )
+            } else {
+                callback(null)
+            }
+        }
+    }
+
+    private fun getItemDtoFromApi(
+        id: Int,
+        context: Context,
+        callback: (PokeAPI.PokemonItemDTO) -> Unit
+    ) {
+        api.getItem(id) { pokemonItemDTO ->
+            insertOnInexistantItem(id, context)
+            callback(pokemonItemDTO)
         }
     }
 }

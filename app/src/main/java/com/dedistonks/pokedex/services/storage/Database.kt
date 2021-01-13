@@ -7,10 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dedistonks.pokedex.services.storage.dao.PokemonDao
+import com.dedistonks.pokedex.services.storage.dao.PokemonItemDao
 import com.dedistonks.pokedex.services.storage.entities.Pokemon
+import com.dedistonks.pokedex.services.storage.entities.PokemonItem
 
 
-@Database(entities = arrayOf(Pokemon::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(Pokemon::class, PokemonItem::class), version = 2, exportSchema = false)
 public abstract class AppDatabase : RoomDatabase() {
     companion object {
         var instance: AppDatabase? = null
@@ -30,18 +32,5 @@ public abstract class AppDatabase : RoomDatabase() {
     }
 
     abstract fun pokemonDao(): PokemonDao
-
-}
-
-val MIGRATION_1_2: Migration = object : Migration(1, 2) {
-    override fun migrate(database: SupportSQLiteDatabase) {
-        database.execSQL(
-            "ALTER TABLE pokemon "
-                    + "ADD abilities TEXT, "
-                    + " types TEXT, "
-                    + " evolutions TEXT, "
-                    + " sprites TEXT, "
-                    + " games TEXT; "
-        )
-    }
+    abstract fun pokemonItemDao(): PokemonItemDao
 }

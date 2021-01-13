@@ -1,6 +1,5 @@
 package com.dedistonks.pokedex.api
 
-import com.dedistonks.pokedex.Adapters.Pokemon.PokemonEntityAdapter
 import com.dedistonks.pokedex.Adapters.PokemonItem.PokemonItemDTOAdapter
 import com.dedistonks.pokedex.utils.Thread
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient
@@ -9,7 +8,6 @@ import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
 class PokeAPI {
     private val itemDTOAdapter = PokemonItemDTOAdapter()
     private val api = PokeApiClient()
-    private val pokemonEntityAdapter = PokemonEntityAdapter()
 
     fun getItems(offset: Int = 0, limit: Int = 5, callback: (List<NamedApiResource>) -> Unit) {
         Thread.thread {
@@ -18,7 +16,7 @@ class PokeAPI {
         }
     }
 
-    fun getItem(id: Int, callback: (ItemDTO) -> Unit) {
+    fun getItem(id: Int, callback: (PokemonItemDTO) -> Unit) {
         Thread.thread {
             callback(itemDTOAdapter.adapt(api.getItem(id)))
         }
@@ -45,7 +43,7 @@ class PokeAPI {
         val games: List<String?>,
     )
 
-    data class ItemDTO(
+    data class PokemonItemDTO(
         val id: Int,
         val name: String,
         val category: String,
