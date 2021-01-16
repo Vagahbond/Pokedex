@@ -2,16 +2,18 @@ package com.dedistonks.pokedex.pokemons
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.Toolbar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.dedistonks.pokedex.R
 
 
@@ -34,20 +36,26 @@ class PokemonListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
 
-    private val api = PokeAPI()
+    private lateinit var  adapter : PokemonRecyclerViewAdapter
+
+
+    private val viewModel : PokemonListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokemon_list)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        toolbar.title = title
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+
+
+//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+//        setSupportActionBar(toolbar)
+//        toolbar.title = title
+
+//        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+//        }
 
         if (findViewById<NestedScrollView>(R.id.pokemon_detail_container) != null) {
             // The detail container view will be present only in the
@@ -57,27 +65,27 @@ class PokemonListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        fetchRecyclerViewData(findViewById(R.id.pokemon_list))
-    }
+        adapter  = PokemonRecyclerViewAdapter(this, twoPane)
 
-    private fun fetchRecyclerViewData(recyclerView : RecyclerView) {
-        api.getPokemons { values ->
-            runOnUiThread {
-                recyclerView.adapter = PokemonRecyclerViewAdapter(this, values, twoPane)
-            }
-        }
+        viewModel.pokemonsList.observe(this, {
+            adapter.submitList(it)
+            Log.d("check", "went through the oserver's callback");
+            Log.d("check", "nb items :  ${it.count()}");
+        })
 
-
-
+        findViewById<RecyclerView>(R.id.pokemon_list).adapter = this.adapter
     }
 
     class PokemonRecyclerViewAdapter(private val parentActivity: PokemonListActivity,
-                                     private val values: List<NamedApiResource>,
                                      private val twoPane: Boolean) :
-            RecyclerView.Adapter<PokemonRecyclerViewAdapter.ViewHolder>() {
+            PagedListAdapter<NamedApiResource, PokemonRecyclerViewAdapter.ViewHolder>(DIFF_CALLBACK) {
+
         private val onClickListener: View.OnClickListener
 
+        private var values = listOf<NamedApiResource>()
+
         init {
+
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as NamedApiResource
                 if (twoPane) {
@@ -106,9 +114,9 @@ class PokemonListActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = values[position]
-            holder.idView.text = item.id.toString()
-            holder.contentView.text = item.name
+            val item = getItem(position)
+            holder.idView.text = item?.id.toString()
+            holder.contentView.text = item?.name
 
             with(holder.itemView) {
                 tag = item
@@ -121,6 +129,19 @@ class PokemonListActivity : AppCompatActivity() {
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val idView: TextView = view.findViewById(R.id.id_text)
             val contentView: TextView = view.findViewById(R.id.content)
+        }
+
+
+        companion object {
+            private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NamedApiResource>() {
+                override fun areItemsTheSame(oldItem: NamedApiResource, newItem: NamedApiResource): Boolean {
+                    return oldItem.id == newItem.id
+                }
+
+                override fun areContentsTheSame(oldItem: NamedApiResource, newItem: NamedApiResource): Boolean {
+                    return oldItem.id == newItem.id
+                }
+            }
         }
     }
 }
