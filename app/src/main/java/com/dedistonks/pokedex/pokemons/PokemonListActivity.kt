@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.dedistonks.pokedex.R
+import com.dedistonks.pokedex.api.PokeAPI
 
 
 import com.dedistonks.pokedex.api.PokeAPI
@@ -29,6 +30,9 @@ import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
  * item details side-by-side using two vertical panes.
  */
 class PokemonListActivity : AppCompatActivity() {
+
+    private val api: PokeAPI = PokeAPI()
+
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -45,7 +49,12 @@ class PokemonListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokemon_list)
 
+        api.getPokemons(0, 6){ pokemons -> Log.d("pokemonsdata", pokemons.toString()) }
 
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        toolbar.title = title
 
 
 //        val toolbar = findViewById<Toolbar>(R.id.toolbar)

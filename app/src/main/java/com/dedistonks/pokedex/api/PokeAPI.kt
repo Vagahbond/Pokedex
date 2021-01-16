@@ -1,11 +1,12 @@
 package com.dedistonks.pokedex.api
 
+import com.dedistonks.pokedex.Adapters.PokemonItem.PokemonItemDTOAdapter
 import com.dedistonks.pokedex.utils.Thread
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient
-import me.sargunvohra.lib.pokekotlin.model.Item
 import me.sargunvohra.lib.pokekotlin.model.NamedApiResource
 
 class PokeAPI {
+    private val itemDTOAdapter = PokemonItemDTOAdapter()
     private val api = PokeApiClient()
 
     fun getItems(offset: Int = 0, limit: Int = 5, callback: (List<NamedApiResource>) -> Unit) {
@@ -15,10 +16,9 @@ class PokeAPI {
         }
     }
 
-    fun getItem(id: Int, callback: (Item) -> Unit) {
+    fun getItem(id: Int, callback: (PokemonItemDTO) -> Unit) {
         Thread.thread {
-            val item = api.getItem(id)
-            callback(item)
+            callback(itemDTOAdapter.adapt(api.getItem(id)))
         }
     }
 
@@ -36,11 +36,20 @@ class PokeAPI {
         val name: String,
         val description: String?,
         val height: Int,
-        val abilities: List<String>,
-        val types: List<String>,
-        val sprites: PokemonSpritesDTO,
-        val evolutions: List<PokemonEvolutionDTO>,
-        val games: List<String>,
+        val abilities: List<String?>,
+        val types: List<String?>,
+        val sprites: PokemonSpritesDTO?,
+        val evolutions: List<PokemonEvolutionDTO?>,
+        val games: List<String?>,
+    )
+
+    data class PokemonItemDTO(
+        val id: Int,
+        val name: String,
+        val category: String,
+        val effects: List<String?>,
+        val spriteUrl: String?,
+        val description: String,
     )
 
     fun getPokemons(offset: Int = 0, limit: Int = 5, callback: (List<NamedApiResource>) -> Unit) {
@@ -70,15 +79,15 @@ class PokeAPI {
                     frontShiny = pokemon.sprites.frontShiny,
                 ),
                 evolutions = evolutions.chain.evolvesTo.map { to ->
-                    val pokemon = api.getPokemon(to.species.id)
+                    val pokemonEvolution = api.getPokemon(to.species.id)
 
                     PokemonEvolutionDTO(
-                        name = pokemon.name,
+                        name = pokemonEvolution.name,
                         sprites = PokemonSpritesDTO(
-                            back = pokemon.sprites.backDefault,
-                            front = pokemon.sprites.frontDefault,
-                            backShiny = pokemon.sprites.backShiny,
-                            frontShiny = pokemon.sprites.frontShiny,
+                            back = pokemonEvolution.sprites.backDefault,
+                            front = pokemonEvolution.sprites.frontDefault,
+                            backShiny = pokemonEvolution.sprites.backShiny,
+                            frontShiny = pokemonEvolution.sprites.frontShiny,
                         ),
                     )
                 },

@@ -2,11 +2,15 @@ package com.dedistonks.pokedex.pokemons
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.dedistonks.pokedex.R
+import com.dedistonks.pokedex.api.PokeAPI
+import com.dedistonks.pokedex.services.storage.entities.Pokemon
+import me.sargunvohra.lib.pokekotlin.client.PokeApi
 
 /**
  * An activity representing a single Pokemon detail screen. This
@@ -16,10 +20,15 @@ import com.dedistonks.pokedex.R
  */
 class PokemonDetailActivity : AppCompatActivity() {
 
+    private val api: PokeAPI = PokeAPI()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokemon_detail)
         setSupportActionBar(findViewById(R.id.detail_toolbar))
+
+        api.getPokemons(0, 6) { pokemons -> Log.d("pokemonsdata", pokemons.toString()) }
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
