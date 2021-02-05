@@ -12,30 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pokedex">
         <activity
-            android:name=".pokemons.PokemonListActivity"
+            android:name="com.dedistonks.pokedex.ui.pokemons.PokemonListActivity"
             android:label="@string/title_pokemon_list"
             android:theme="@style/Theme.Pokedex.NoActionBar"/>
         <activity
-            android:name=".pokemons.PokemonDetailActivity"
+            android:name="com.dedistonks.pokedex.ui.pokemons.PokemonDetailActivity"
             android:label="@string/title_pokemon_detail"
-            android:parentActivityName=".pokemons.PokemonListActivity"
+            android:parentActivityName="com.dedistonks.pokedex.ui.pokemons.PokemonListActivity"
             android:theme="@style/Theme.Pokedex.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dedistonks.pokedex.pokemons.PokemonListActivity" />
+                android:value="com.dedistonks.pokedex.ui.pokemons.PokemonListActivity" />
         </activity>
         <activity
-            android:name=".objects.ObjectListActivity"
+            android:name=".ui.items.ItemListActivity"
             android:label="@string/title_pokemon_list"
             android:theme="@style/Theme.Pokedex.NoActionBar"/>
         <activity
-            android:name=".objects.ObjectDetailActivity"
+            android:name=".ui.items.ItemDetailActivity"
             android:label="@string/title_object_detail"
-            android:parentActivityName=".objects.ObjectListActivity"
+            android:parentActivityName=".ui.items.ItemListActivity"
             android:theme="@style/Theme.Pokedex.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dedistonks.pokedex.objects.ObjectListActivity" />
+                android:value="com.dedistonks.pokedex.ui.items.ItemListActivity" />
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>

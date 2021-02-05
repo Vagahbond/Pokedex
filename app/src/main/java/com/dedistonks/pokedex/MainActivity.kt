@@ -4,11 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.dedistonks.pokedex.objects.ObjectListActivity
-import com.dedistonks.pokedex.pokemons.PokemonListActivity
+import androidx.paging.ExperimentalPagingApi
+import com.dedistonks.pokedex.ui.items.ItemListActivity
+import com.dedistonks.pokedex.ui.pokemons.PokemonListActivity
 
 class MainActivity : AppCompatActivity() {
 
+    @ExperimentalPagingApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         navToObjectsButton.setOnClickListener{
-            val intent = Intent(this, ObjectListActivity::class.java)
+            val intent = Intent(this, ItemListActivity::class.java)
             startActivity(intent)
         }
     }

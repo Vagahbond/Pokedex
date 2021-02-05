@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Pokedex</string>
 
-    <string name="unloaded_data">ERROR</string>
+    <string name="unloaded_data">Loading...</string>
 
     <string name="title_pokemon_list">Pokemons</string>
     <string name="title_pokemon_detail">Pokemon Detail</string>
@@ -14,5 +14,6 @@
     <string name="height">Height</string>
     <string name="meters_indicator">m.</string>
     <string name="height_property">Height: %1$s m</string>
+    <string name="retry">Retry</string>
 
 </resources>
