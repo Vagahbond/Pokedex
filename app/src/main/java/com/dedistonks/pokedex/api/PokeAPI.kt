@@ -5,7 +5,7 @@ import com.dedistonks.pokedex.adapters.item.ItemAdapter
 import com.dedistonks.pokedex.models.*
 import kotlinx.coroutines.*
 import me.sargunvohra.lib.pokekotlin.client.PokeApiClient
-import me.sargunvohra.lib.pokekotlin.model.NamedApiResourceList
+
 
 class PokeAPI {
     private val itemAdapter = ItemAdapter()
@@ -100,6 +100,7 @@ class PokeAPI {
             val pokedex = api.getPokedex(id)
             val evolutions = api.getEvolutionChain(id)
 
+
             Pokemon(
                     id = pokemon.id,
                     name = pokemon.name,
@@ -108,6 +109,7 @@ class PokeAPI {
                     abilities = pokemon.abilities.map { ability -> ability.ability.name },
                     types = pokemon.types.map { type -> type.type.name },
                     sprites = PokemonSprites(
+
                             back = pokemon.sprites.backDefault,
                             front = pokemon.sprites.frontDefault,
                             backShiny = pokemon.sprites.backShiny,
