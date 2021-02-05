@@ -89,7 +89,7 @@ class PokeAPI {
 //    }
 
     suspend fun getPokemons(offset: Int = 0, limit: Int = 5) = withContext(Dispatchers.IO) {
-        api.getPokemonList(offset, limit).results.map { Item(it.id, it.name) }
+        api.getPokemonList(offset, limit).results.map { Pokemon(it.id, it.name) }
     }
 
     suspend fun getPokemon(id: Int): Pokemon {
