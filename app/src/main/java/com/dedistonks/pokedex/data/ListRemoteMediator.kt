@@ -76,7 +76,7 @@ class ListRemoteMediator (
 
     }
 
-    private fun nukeConcernedResource() {
+    private suspend fun nukeConcernedResource() {
         when (resourceType) {
             ListContentType.POKEMON -> database.pokemonDao().nukePokemons()
             ListContentType.ITEM -> database.itemDao().nukeItems()
@@ -95,7 +95,7 @@ class ListRemoteMediator (
         }
     }
 
-    private fun insertConcernedResource(data: List<ListAPIResource>) {
+    private suspend fun insertConcernedResource(data: List<ListAPIResource>) {
         when(resourceType) {
             ListContentType.POKEMON -> database.pokemonDao().insertAll(pokemons = data.map { it as Pokemon }.toTypedArray() )
             ListContentType.ITEM -> database.itemDao().insertAll(items = data.map { it as Item }.toTypedArray() )

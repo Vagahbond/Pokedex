@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dedistonks.pokedex.Injection
+import com.dedistonks.pokedex.R
 import com.dedistonks.pokedex.databinding.PokemonDetailBinding
 import com.dedistonks.pokedex.models.Pokemon
 import com.dedistonks.pokedex.utils.ImageToBitmap
@@ -81,15 +82,19 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun bindPokemon(pokemon: Pokemon) {
-        binding.twID.text = pokemon.id.toString()
+        binding.twID.text = getString(R.string.id_property, pokemon.id)
         binding.twName.text = pokemon.name
 
         binding.tvDetails.text = pokemon.description
-        binding.tvHeight.text = pokemon.height.toString()
+        binding.tvHeight.text = getString(R.string.height_property, pokemon.height?.times(10))
+
+        if (pokemon.types.isNotEmpty()) binding.tvType1.text = pokemon.abilities[0]
+        if (pokemon.types.size >= 2) binding.tvType2.text = pokemon.abilities[1]
+        if (pokemon.types.size >= 3) binding.tvType2.text = pokemon.abilities[2]
 
 
         if (pokemon.types.isNotEmpty()) binding.tvType1.text = pokemon.types[0]
-        if (pokemon.types.size <= 2) binding.tvType2.text = pokemon.types[1]
+        if (pokemon.types.size >= 2) binding.tvType2.text = pokemon.types[1]
 
         pokemon.sprites?.front?.let{ url ->
             ImageToBitmap.from(url,) {

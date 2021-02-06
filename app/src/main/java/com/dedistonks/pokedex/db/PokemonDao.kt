@@ -13,20 +13,20 @@ interface PokemonDao {
     fun getAll(): PagingSource<Int, Pokemon>
 
     @Query("SELECT * FROM pokemons WHERE id = (:Id) LIMIT 1")
-    fun getById(Id: Int) : Pokemon
+    suspend fun getById(Id: Int) : Pokemon
 
 //    @Query("SELECT * FROM pokemons WHERE id IN (:pokemonIds)")
 //    fun getAllByIds(pokemonIds: List<Int>): List<Pokemon>
 
     @Query("SELECT * FROM pokemons WHERE name LIKE :name")
-    fun findByName(name: String): Pokemon
+    suspend fun findByName(name: String): Pokemon
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg pokemons: Pokemon)
+    suspend fun insertAll(vararg pokemons: Pokemon)
 
     @Delete
-    fun delete(pokemon: Pokemon)
+    suspend fun delete(pokemon: Pokemon)
 
     @Query("DELETE FROM pokemons")
-    fun nukePokemons()
+    suspend fun nukePokemons()
 }

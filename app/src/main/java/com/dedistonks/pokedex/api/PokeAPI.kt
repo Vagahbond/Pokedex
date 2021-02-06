@@ -1,6 +1,5 @@
 package com.dedistonks.pokedex.api
 
-import android.util.Log
 import com.dedistonks.pokedex.adapters.item.ItemAdapter
 import com.dedistonks.pokedex.models.*
 import kotlinx.coroutines.*

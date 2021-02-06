@@ -16,20 +16,20 @@ interface ItemDao {
 //    fun loadAllByIds(itemIds: List<Int>): List<Pokemon>
 
     @Query("SELECT * FROM ITEMS WHERE ID IN (:id) LIMIT 1")
-    fun getById(id: Int): Item
+    suspend fun getById(id: Int): Item
 
     @Query("SELECT * FROM ITEMS WHERE name LIKE :name")
-    fun findByName(name: String): Item
+    suspend fun findByName(name: String): Item
 
     @Query("SELECT * FROM ITEMS")
     fun getAll(): PagingSource<Int, Item>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg items: Item)
+    suspend fun insertAll(vararg items: Item)
 
     @Delete
-    fun delete(item: Item)
+    suspend fun delete(item: Item)
 
     @Query("DELETE FROM ITEMS")
-    fun nukeItems()
+    suspend fun nukeItems()
 }

@@ -13,7 +13,11 @@
     <string name="pokemon_from_back">Pokemon from back</string>
     <string name="height">Height</string>
     <string name="meters_indicator">m.</string>
-    <string name="height_property">Height: %1$s m</string>
+    <string name="id_property">ID: %1$d</string>
+    <string name="height_property">Height: %1$d cm</string>
     <string name="retry">Retry</string>
+    <string name="types_label">Types:</string>
+    <string name="abilities_label">Abilities:</string>
+
 
 </resources>

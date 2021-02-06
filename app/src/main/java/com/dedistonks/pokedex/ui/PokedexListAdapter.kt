@@ -19,35 +19,14 @@ import com.dedistonks.pokedex.ui.pokemons.PokemonListActivity
 
 // TODO: could implement separators logic here
 @OptIn(ExperimentalPagingApi::class)
-class PokedexListAdapter(twoPane: Boolean, parentActivity: AppCompatActivity) : PagingDataAdapter<ListAPIResource, ViewHolder>(RESOURCE_COMPARATOR) {
-    private val onClickListener: View.OnClickListener
+class PokedexListAdapter(private var twoPane: Boolean, private var parentActivity: AppCompatActivity) : PagingDataAdapter<ListAPIResource, ViewHolder>(RESOURCE_COMPARATOR) {
 
-        init {
-            Log.d(this.javaClass.name, "Constructor ran.")
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as ListAPIResource
-                if (twoPane) {
-                    val fragment = PokemonDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putInt(PokemonDetailFragment.ARG_ITEM_ID, item.id)
-                        }
-                    }
-                    parentActivity.supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.pokemon_detail_container, fragment)
-                            .commit()
-                } else {
-                    val intent = Intent(v.context, PokemonDetailActivity::class.java).apply {
-                        putExtra(PokemonDetailFragment.ARG_ITEM_ID, item.id)
-                    }
-                    v.context.startActivity(intent)
-                }
-            }
-        }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         Log.d(this.javaClass.name, "view holder created")
-        return PokedexListViewHolder.create(parent)
+        return PokedexListViewHolder.create(parent, parentActivity, twoPane)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -80,7 +59,6 @@ class PokedexListAdapter(twoPane: Boolean, parentActivity: AppCompatActivity) : 
         }
     }
 
-    override fun getItemCount(): Int {
-        return super.getItemCount()
-    }
+
+
 }

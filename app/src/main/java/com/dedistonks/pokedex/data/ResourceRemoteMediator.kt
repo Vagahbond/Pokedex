@@ -54,7 +54,7 @@ class ResourceRemoteMediator (
         }
     }
 
-    private fun getConcernedResourceFromDatabase(): ListAPIResource{
+    private suspend fun getConcernedResourceFromDatabase(): ListAPIResource{
         return when(resourceType) {
             ListContentType.POKEMON -> database.pokemonDao().getById(index)
             ListContentType.ITEM -> database.itemDao().getById(index)
@@ -63,7 +63,7 @@ class ResourceRemoteMediator (
     }
 
 
-    private fun updateConcernedResource(resource : ListAPIResource) {
+    private suspend fun updateConcernedResource(resource : ListAPIResource) {
         when(resource) {
             is Pokemon -> database.pokemonDao().insertAll(resource)
             is Item -> database.itemDao().insertAll(resource)
