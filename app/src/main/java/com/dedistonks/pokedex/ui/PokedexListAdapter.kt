@@ -49,12 +49,11 @@ class PokedexListAdapter(private var twoPane: Boolean, private var parentActivit
                 return oldItem.id == newItem.id && oldItem::class == newItem::class
             }
 
-            //TODO: this function is bullshit
             override fun areContentsTheSame(
                 oldItem: ListAPIResource,
                 newItem: ListAPIResource
             ): Boolean {
-                return newItem.id == oldItem.id
+                return newItem.id == oldItem.id && newItem.name.equals(oldItem.name)
             }
         }
     }

@@ -88,13 +88,13 @@ class PokemonDetailFragment : Fragment() {
         binding.tvDetails.text = pokemon.description
         binding.tvHeight.text = getString(R.string.height_property, pokemon.height?.times(10))
 
-        if (pokemon.types.isNotEmpty()) binding.tvType1.text = pokemon.abilities[0]
-        if (pokemon.types.size >= 2) binding.tvType2.text = pokemon.abilities[1]
-        if (pokemon.types.size >= 3) binding.tvType2.text = pokemon.abilities[2]
+        if (pokemon.abilities.isNotEmpty()) binding.tvAbility3.text = pokemon.abilities[0]
+        if (pokemon.abilities.size >= 2) binding.tvAbility2.text = pokemon.abilities[1]
+        if (pokemon.abilities.size >= 3) binding.tvAbility1.text = pokemon.abilities[2]
 
 
-        if (pokemon.types.isNotEmpty()) binding.tvType1.text = pokemon.types[0]
-        if (pokemon.types.size >= 2) binding.tvType2.text = pokemon.types[1]
+        if (pokemon.types.isNotEmpty()) binding.tvType2.text = pokemon.types[0]
+        if (pokemon.types.size >= 2) binding.tvType1.text = pokemon.types[1]
 
         pokemon.sprites?.front?.let{ url ->
             ImageToBitmap.from(url,) {

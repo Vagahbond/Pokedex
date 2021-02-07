@@ -30,7 +30,7 @@
             android:theme="@style/Theme.Pokedex.NoActionBar"/>
         <activity
             android:name=".ui.items.ItemDetailActivity"
-            android:label="@string/title_object_detail"
+            android:label="@string/title_item_detail"
             android:parentActivityName=".ui.items.ItemListActivity"
             android:theme="@style/Theme.Pokedex.NoActionBar">
             <meta-data

@@ -91,19 +91,19 @@ class PokeAPI {
         api.getPokemonList(offset, limit).results.map { Pokemon(it.id, it.name) }
     }
 
-    suspend fun getPokemon(id: Int): Pokemon {
+    suspend fun getPokemon(id: Int): Pokemon { // TODO: wrap responses with error yo
 
     //TODO use an adapter yo
         return withContext(Dispatchers.IO) {
             val pokemon = api.getPokemon(id)
-            val pokedex = api.getPokedex(id)
+            val species = api.getPokemonSpecies(pokemon.species.id)
             val evolutions = api.getEvolutionChain(id)
 
 
             Pokemon(
                     id = pokemon.id,
                     name = pokemon.name,
-                    description = pokedex.descriptions.find { description -> description.language.name == "en" }!!.description,
+                    description = species.flavorTextEntries.find { description -> description.language.name == "en" }!!.flavorText,
                     height = pokemon.height,
                     abilities = pokemon.abilities.map { ability -> ability.ability.name },
                     types = pokemon.types.map { type -> type.type.name },
