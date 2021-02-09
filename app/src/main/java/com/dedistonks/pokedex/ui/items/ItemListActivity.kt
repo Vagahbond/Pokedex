@@ -1,7 +1,6 @@
 package com.dedistonks.pokedex.ui.items
 
 import android.os.Bundle
-import android.util.Log
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -12,15 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import androidx.paging.map
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.dedistonks.pokedex.Injection
 import com.dedistonks.pokedex.R
 import com.dedistonks.pokedex.databinding.ActivityItemListBinding
 import com.dedistonks.pokedex.models.ListContentType
-import com.dedistonks.pokedex.ui.PokedexListAdapter
-import com.dedistonks.pokedex.ui.PokedexListLoadStateAdapter
-import com.dedistonks.pokedex.ui.PokedexListViewModel
+import com.dedistonks.pokedex.ui.named_resource_list.PokedexListAdapter
+import com.dedistonks.pokedex.ui.named_resource_list.PokedexListLoadStateAdapter
+import com.dedistonks.pokedex.ui.named_resource_list.PokedexListViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

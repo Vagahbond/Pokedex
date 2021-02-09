@@ -1,4 +1,4 @@
-package com.dedistonks.pokedex.ui
+package com.dedistonks.pokedex.ui.named_resource_list
 
 
 import android.content.Intent
@@ -23,7 +23,12 @@ import java.lang.IllegalStateException
 
 
 @ExperimentalPagingApi
-class PokedexListViewHolder(view: View, parentActivity: AppCompatActivity, twoPane: Boolean): RecyclerView.ViewHolder(view) {
+class PokedexListViewHolder(
+        view: View,
+        parentActivity: AppCompatActivity,
+        twoPane: Boolean):
+        RecyclerView.ViewHolder(view) {
+
     private val idText: TextView = view.findViewById(R.id.id_text)
     private val content: TextView = view.findViewById(R.id.content)
 

@@ -3,7 +3,7 @@ package com.dedistonks.pokedex.adapters.item
 import com.dedistonks.pokedex.adapters.Adapter
 import com.dedistonks.pokedex.models.Item
 
-class ItemAdapter : Adapter<me.sargunvohra.lib.pokekotlin.model.Item, Item> {
+object ItemAdapter : Adapter<me.sargunvohra.lib.pokekotlin.model.Item, Item> {
     override fun adapt(source: me.sargunvohra.lib.pokekotlin.model.Item): Item {
         return Item(
                 id = source.id,

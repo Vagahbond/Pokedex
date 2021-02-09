@@ -11,11 +11,11 @@ data class Pokemon (
     @ColumnInfo(name = "name") override val name: String,
     @ColumnInfo(name = "description") val description: String? = null,
     @ColumnInfo(name = "height") val height: Int? = null,
-    @ColumnInfo(name = "abilities") val abilities: List<String?> = emptyList(),
-    @ColumnInfo(name = "types") val types: List<String?> = emptyList(),
+    @ColumnInfo(name = "abilities") val abilities: List<String> = emptyList(),
+    @ColumnInfo(name = "types") val types: List<String> = emptyList(),
     @ColumnInfo(name = "sprites") val sprites: PokemonSprites? = PokemonSprites(null, null, null, null),
-    @ColumnInfo(name = "evolutions") val evolutions: List<PokemonEvolution?> = emptyList(),
-    @ColumnInfo(name = "games") val games: List<String?> = emptyList(),
+    @ColumnInfo(name = "evolutions") val evolutions: List<PokemonEvolution> = emptyList(),
+    @ColumnInfo(name = "games") val games: List<String> = emptyList(),
 ) : ListAPIResource(ListContentType.POKEMON) {
 
     override fun isComplete(): Boolean {

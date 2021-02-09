@@ -1,14 +1,14 @@
 package com.dedistonks.pokedex.adapters.item
 
-import com.dedistonks.pokedex.adapters.ReversableAdapter
-import com.dedistonks.pokedex.api.PokeAPI
+import com.dedistonks.pokedex.adapters.Adapter
 import com.dedistonks.pokedex.models.Item
+import java.util.*
 
-class PokemonItemAdapter : ReversableAdapter<Item, Item> {
+object PokemonItemAdapter : Adapter<Item, Item> {
     override fun adapt(source: Item): Item {
         return Item(
             source.id,
-            source.name,
+            source.name.capitalize(Locale.getDefault()),
             source.category,
             source.effects,
             source.spriteUrl,
@@ -16,14 +16,4 @@ class PokemonItemAdapter : ReversableAdapter<Item, Item> {
         )
     }
 
-    override fun reverseAdapt(source: Item): Item {
-        return Item(
-            source.id,
-            source.name,
-            source.category,
-            source.effects,
-            source.spriteUrl,
-            source.description
-        )
-    }
 }

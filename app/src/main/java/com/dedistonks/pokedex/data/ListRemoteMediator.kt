@@ -16,7 +16,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.io.InvalidObjectException
 
-
+//TODO check the paging
 @OptIn(ExperimentalPagingApi::class)
 class ListRemoteMediator (
         private val service: PokeAPI,

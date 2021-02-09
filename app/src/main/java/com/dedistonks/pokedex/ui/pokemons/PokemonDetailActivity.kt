@@ -2,20 +2,10 @@ package com.dedistonks.pokedex.ui.pokemons
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
-import com.dedistonks.pokedex.Injection
 import com.dedistonks.pokedex.R
-import com.dedistonks.pokedex.api.PokeAPI
-import com.dedistonks.pokedex.databinding.ActivityPokemonDetailBinding
-import com.dedistonks.pokedex.databinding.ActivityPokemonListBinding
-import com.dedistonks.pokedex.ui.PokedexListAdapter
-import com.dedistonks.pokedex.ui.PokedexListViewModel
-import kotlinx.coroutines.Job
 
 /**
  * An activity representing a single Pokemon detail screen. This

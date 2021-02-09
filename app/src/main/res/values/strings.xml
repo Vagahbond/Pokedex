@@ -18,6 +18,8 @@
     <string name="retry">Retry</string>
     <string name="types_label">Types:</string>
     <string name="abilities_label">Abilities:</string>
+    <string name="games_list_label">Games : </string>
+    <string name="evolutions_list_label">"Evolution chain : "</string>
 
 
 </resources>

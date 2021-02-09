@@ -1,4 +1,4 @@
-package com.dedistonks.pokedex.ui
+package com.dedistonks.pokedex.ui.named_resource_list
 
 import android.view.ViewGroup
 import androidx.paging.LoadState

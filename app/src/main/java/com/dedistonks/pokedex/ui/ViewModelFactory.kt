@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dedistonks.pokedex.data.PokeAPIRepository
 import com.dedistonks.pokedex.models.ListContentType
 import com.dedistonks.pokedex.ui.items.ItemDetailViewModel
+import com.dedistonks.pokedex.ui.named_resource_list.PokedexListViewModel
 import com.dedistonks.pokedex.ui.pokemons.PokemonDetailViewModel
 import java.lang.IllegalArgumentException
 
