@@ -53,7 +53,7 @@ class ItemDetailActivity : AppCompatActivity() {
             }
 
             supportFragmentManager.beginTransaction()
-                .add(R.id.object_detail_container, fragment)
+                .add(R.id.item_detail_container, fragment)
                 .commit()
         }
     }

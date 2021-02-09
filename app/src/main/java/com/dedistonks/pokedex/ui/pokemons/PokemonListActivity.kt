@@ -16,9 +16,9 @@ import com.dedistonks.pokedex.Injection
 import com.dedistonks.pokedex.R
 import com.dedistonks.pokedex.databinding.ActivityPokemonListBinding
 import com.dedistonks.pokedex.models.ListContentType
-import com.dedistonks.pokedex.ui.PokedexListAdapter
-import com.dedistonks.pokedex.ui.PokedexListLoadStateAdapter
-import com.dedistonks.pokedex.ui.PokedexListViewModel
+import com.dedistonks.pokedex.ui.named_resource_list.PokedexListAdapter
+import com.dedistonks.pokedex.ui.named_resource_list.PokedexListLoadStateAdapter
+import com.dedistonks.pokedex.ui.named_resource_list.PokedexListViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest

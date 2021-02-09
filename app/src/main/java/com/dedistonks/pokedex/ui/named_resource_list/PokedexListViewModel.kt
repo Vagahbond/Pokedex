@@ -1,4 +1,4 @@
-package com.dedistonks.pokedex.ui
+package com.dedistonks.pokedex.ui.named_resource_list
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,6 @@ import com.dedistonks.pokedex.data.PokeAPIRepository
 import com.dedistonks.pokedex.models.ListAPIResource
 import com.dedistonks.pokedex.models.ListContentType
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 
 class PokedexListViewModel(
         private val repository: PokeAPIRepository,

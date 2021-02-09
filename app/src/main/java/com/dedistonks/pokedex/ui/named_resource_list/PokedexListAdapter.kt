@@ -1,10 +1,6 @@
-package com.dedistonks.pokedex.ui
+package com.dedistonks.pokedex.ui.named_resource_list
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.ExperimentalPagingApi
@@ -13,13 +9,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.dedistonks.pokedex.R
 import com.dedistonks.pokedex.models.ListAPIResource
-import com.dedistonks.pokedex.ui.pokemons.PokemonDetailFragment
-import com.dedistonks.pokedex.ui.pokemons.PokemonDetailActivity
-import com.dedistonks.pokedex.ui.pokemons.PokemonListActivity
 
 // TODO: could implement separators logic here
 @OptIn(ExperimentalPagingApi::class)
-class PokedexListAdapter(private var twoPane: Boolean, private var parentActivity: AppCompatActivity) : PagingDataAdapter<ListAPIResource, ViewHolder>(RESOURCE_COMPARATOR) {
+class PokedexListAdapter(private var twoPane: Boolean, private var parentActivity: AppCompatActivity) : PagingDataAdapter<ListAPIResource, ViewHolder>(
+    RESOURCE_COMPARATOR
+) {
 
 
 
@@ -49,12 +44,11 @@ class PokedexListAdapter(private var twoPane: Boolean, private var parentActivit
                 return oldItem.id == newItem.id && oldItem::class == newItem::class
             }
 
-            //TODO: this function is bullshit
             override fun areContentsTheSame(
                 oldItem: ListAPIResource,
                 newItem: ListAPIResource
             ): Boolean {
-                return newItem.id == oldItem.id
+                return newItem.id == oldItem.id && newItem.name.equals(oldItem.name)
             }
         }
     }

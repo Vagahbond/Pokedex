@@ -9,11 +9,9 @@ import com.dedistonks.pokedex.models.Pokemon
 
 @Dao
 interface ItemDao {
-//    @Query("SELECT * FROM ITEMS")
-//    fun getAll(): List<Item>
 
-//    @Query("SELECT * FROM ITEMS WHERE id IN (:itemIds)")
-//    fun loadAllByIds(itemIds: List<Int>): List<Pokemon>
+    @Query("SELECT * FROM ITEMS WHERE id IN (:itemIds)")
+    fun loadAllByIds(itemIds: List<Int>): PagingSource<Int, Item>
 
     @Query("SELECT * FROM ITEMS WHERE ID IN (:id) LIMIT 1")
     suspend fun getById(id: Int): Item

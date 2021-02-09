@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Pokedex</string>
 
-    <string name="unloaded_data">Loading...</string>
+    <string name="unloaded_data">Loading…</string>
 
     <string name="title_pokemon_list">Pokemons</string>
     <string name="title_pokemon_detail">Pokemon Detail</string>
 
-    <string name="title_object_list">Objects</string>
-    <string name="title_object_detail">Object Detail</string>
+    <string name="title_items_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
     <string name="welcome_message">Welcome to the Pokedex</string>
     <string name="pokemon_from_front">Pokemon from front</string>
     <string name="pokemon_from_back">Pokemon from back</string>
@@ -18,6 +18,8 @@
     <string name="retry">Retry</string>
     <string name="types_label">Types:</string>
     <string name="abilities_label">Abilities:</string>
+    <string name="games_list_label">Games : </string>
+    <string name="evolutions_list_label">"Evolution chain : "</string>
 
 
 </resources>

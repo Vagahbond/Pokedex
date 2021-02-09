@@ -16,7 +16,7 @@ class ItemDetailViewModel(
 
 
     suspend fun loadItem(index: Int): Item {
-        Log.d("ItemDetailViewModel", "Loading item ${index}.")
+        Log.d(this.javaClass.name, "Loading item ${index}.")
         val lastResult = currentItemResult.value
 
         if (selectedIndex == index && lastResult != null) {

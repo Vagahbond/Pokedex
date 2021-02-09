@@ -7,12 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.dedistonks.pokedex.Injection
 import com.dedistonks.pokedex.R
 import com.dedistonks.pokedex.databinding.PokemonDetailBinding
 import com.dedistonks.pokedex.models.Pokemon
+import com.dedistonks.pokedex.ui.evolutions_list.EvolutionsListRecyclerAdapter
+import com.dedistonks.pokedex.ui.simple_list.SimpleItemRecyclerAdapter
 import com.dedistonks.pokedex.utils.ImageToBitmap
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -34,6 +38,8 @@ class PokemonDetailFragment : Fragment() {
 
     private var loadJob: Job? = null
 
+    private var twoPane: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +55,7 @@ class PokemonDetailFragment : Fragment() {
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                     load(it.getInt(ARG_ITEM_ID))
+                twoPane = it.getBoolean(TWO_PANE_ITEM_ID)
             }
         }
 
@@ -88,13 +95,28 @@ class PokemonDetailFragment : Fragment() {
         binding.tvDetails.text = pokemon.description
         binding.tvHeight.text = getString(R.string.height_property, pokemon.height?.times(10))
 
-        if (pokemon.types.isNotEmpty()) binding.tvType1.text = pokemon.abilities[0]
-        if (pokemon.types.size >= 2) binding.tvType2.text = pokemon.abilities[1]
-        if (pokemon.types.size >= 3) binding.tvType2.text = pokemon.abilities[2]
+        if (pokemon.abilities.isNotEmpty()) binding.tvAbility3.text = pokemon.abilities[0]
+        if (pokemon.abilities.size >= 2) binding.tvAbility2.text = pokemon.abilities[1]
+        if (pokemon.abilities.size >= 3) binding.tvAbility1.text = pokemon.abilities[2]
 
 
-        if (pokemon.types.isNotEmpty()) binding.tvType1.text = pokemon.types[0]
-        if (pokemon.types.size >= 2) binding.tvType2.text = pokemon.types[1]
+        if (pokemon.types.isNotEmpty()) binding.tvType2.text = pokemon.types[0]
+        if (pokemon.types.size >= 2) binding.tvType1.text = pokemon.types[1]
+
+        context?.let {
+            binding.rvGames.layoutManager = SimpleItemRecyclerAdapter.getHorizontalLayoutManager(it)
+            binding.rvGames.addItemDecoration(SimpleItemRecyclerAdapter.getSeparator(it))
+
+            binding.rvEvolutions.layoutManager = EvolutionsListRecyclerAdapter.getHorizontalLayoutManager(it)
+            binding.rvEvolutions.addItemDecoration(EvolutionsListRecyclerAdapter.getSeparator(it))
+        }
+
+        binding.rvGames.adapter = SimpleItemRecyclerAdapter(pokemon.games)
+
+        activity?.let {
+            binding.rvEvolutions.adapter = EvolutionsListRecyclerAdapter(pokemon.evolutions, it) { id -> load(id) }
+        }
+
 
         pokemon.sprites?.front?.let{ url ->
             ImageToBitmap.from(url,) {
@@ -123,6 +145,7 @@ class PokemonDetailFragment : Fragment() {
 
     companion object {
         const val ARG_ITEM_ID = "pokemon_id"
+        const val TWO_PANE_ITEM_ID = "two_pane"
     }
 
 

@@ -1,10 +1,7 @@
 package com.dedistonks.pokedex.models
 
-
-
-data class PokemonEvolution(
+data class PokemonEvolution (
+    val id: Int,
     val name: String,
-    val sprites: PokemonSprites
-    )
-
-
+    val sprite: String?,
+)

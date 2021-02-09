@@ -13,7 +13,7 @@
     tools:context=".ui.items.ItemListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/object_list"
+        android:id="@+id/item_list"
         android:name="com.dedistonks.pokedex.objects.ObjectListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
