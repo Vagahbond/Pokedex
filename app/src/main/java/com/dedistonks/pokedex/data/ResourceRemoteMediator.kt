@@ -22,7 +22,7 @@ class ResourceRemoteMediator (
     suspend fun load(): ListAPIResource {
         val cacheData = getConcernedResourceFromDatabase()
 
-        if (cacheData.isComplete()) return cacheData
+        if (cacheData != null && cacheData.isComplete()) return cacheData //TODO make nullcheck more proepr
 
         try {
             val itemFromAPI = getConcernedResource() // TODO implement response from API to manage error cases

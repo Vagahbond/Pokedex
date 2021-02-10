@@ -1,16 +1,19 @@
 package com.dedistonks.pokedex.ui.items
 
 import android.content.ClipData
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dedistonks.pokedex.Injection
 import com.dedistonks.pokedex.databinding.ItemDetailBinding
 import com.dedistonks.pokedex.models.Item
+import com.dedistonks.pokedex.utils.ImageToBitmap
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -53,9 +56,11 @@ class ItemDetailFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = ItemDetailBinding.inflate(layoutInflater)
 
         return binding.root
@@ -68,7 +73,26 @@ class ItemDetailFragment : Fragment() {
         }
     }
 
+    private fun setImageToComponent(target: ImageView, value: Bitmap) {
+        activity?.let {
+            it.runOnUiThread{
+                target.setImageBitmap(value)
+            }
+        }
+    }
+
     private fun bindItem(item: Item) {
+        binding.tvItemName.text = item.name
+
+        binding.tvItemCategory.text = item.category
+
+        binding.tvItemDescription.text = item.description
+
+        item.spriteUrl?.let {
+            ImageToBitmap.from(it) { bitmap ->
+                setImageToComponent(binding.ivItem, bitmap)
+            }
+        }
     }
 
     companion object {

@@ -8,50 +8,71 @@
 
 
     <ImageView
-        android:id="@+id/itemImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ItemName"
+        android:id="@+id/ivItem"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvItemName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/item"/>
 
-    <TextView
-        android:id="@+id/ItemName"
-        android:layout_width="wrap_content"
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/llItemCategory"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="89dp"
-        android:layout_marginBottom="32dp"
-        android:text="item name"
-        app:layout_constraintBottom_toTopOf="@+id/ItemCategory"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/tvItemDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemImage" />
+        app:layout_constraintTop_toBottomOf="@id/ivItem" >
+
+
+        <TextView
+            android:id="@+id/tvItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unloaded_data"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvItemCategory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+        <TextView
+            android:id="@+id/tvItemCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/unloaded_data"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvItemName" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/itemDescription"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvItemDescription"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="item description"
+        android:text="@string/unloaded_data"
+        android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ItemCategory" />
-
-    <TextView
-        android:id="@+id/ItemCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Item Category"
-        app:layout_constraintBottom_toTopOf="@+id/itemDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ItemName" />
-
+        app:layout_constraintTop_toBottomOf="@id/llItemCategory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

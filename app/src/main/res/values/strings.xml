@@ -19,7 +19,10 @@
     <string name="types_label">Types:</string>
     <string name="abilities_label">Abilities:</string>
     <string name="games_list_label">Games : </string>
-    <string name="evolutions_list_label">"Evolution chain : "</string>
+    <string name="evolutions_list_label">Evolution chain : </string>
+    <string name="item_description_label">Description :</string>
+    <string name="item_category_label">Category: </string>
+    <string name="item">Item</string>
 
 
 </resources>

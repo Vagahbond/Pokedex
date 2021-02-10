@@ -46,8 +46,9 @@ class PokemonDetailActivity : AppCompatActivity() {
             // using a fragment transaction.
             val fragment = PokemonDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(PokemonDetailFragment.ARG_ITEM_ID,
-                            intent.getIntExtra(PokemonDetailFragment.ARG_ITEM_ID, 0))
+                    putInt(
+                        PokemonDetailFragment.ARG_ITEM_ID,
+                            intent.getIntExtra(PokemonDetailFragment.ARG_ITEM_ID, 1))
                 }
             }
 
