@@ -141,6 +141,9 @@ class PokemonDetailFragment : Fragment() {
                 setImageToComponent(binding.ivPokemonShinyBack, it)
             }
         }
+
+        binding.clPokemonDetailWrapper.visibility = View.VISIBLE
+        binding.flLoading.visibility = View.GONE
     }
 
     companion object {

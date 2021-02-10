@@ -15,6 +15,8 @@ import com.dedistonks.pokedex.db.PokedexDatabase
 import retrofit2.HttpException
 import java.io.IOException
 import java.io.InvalidObjectException
+import java.lang.Error
+import java.lang.Exception
 
 //TODO check the paging
 @OptIn(ExperimentalPagingApi::class)
@@ -37,14 +39,14 @@ class ListRemoteMediator (
                 val remoteKey = state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.id?.div(state.config.pageSize)
                 remoteKey ?: throw InvalidObjectException("Remote key and the prevKey should not be null")
 
-                remoteKey.minus(1 )
+                remoteKey.minus(1 * state.config.pageSize)
 
             }
             LoadType.APPEND -> {
                 val remoteKeys = state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.id?.div(state.config.pageSize)
                 remoteKeys ?: throw InvalidObjectException("Remote key should not be null for $loadType")
 
-                remoteKeys.plus(1 )
+                remoteKeys.plus(1 * state.config.pageSize)
             }
 
         }
@@ -70,6 +72,9 @@ class ListRemoteMediator (
         } catch (exception: IOException) {
             return MediatorResult.Error(exception)
         } catch (exception: HttpException) {
+            return MediatorResult.Error(exception)
+        } catch (exception: Exception) {
+            Log.d(this.javaClass.name, "Error occured $exception")
             return MediatorResult.Error(exception)
         }
 

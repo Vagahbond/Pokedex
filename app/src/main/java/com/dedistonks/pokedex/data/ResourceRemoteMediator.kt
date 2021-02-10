@@ -19,12 +19,18 @@ class ResourceRemoteMediator (
         private val index: Int,
 ) {
 
-    suspend fun load(): ListAPIResource {
-        val cacheData = getConcernedResourceFromDatabase()
+    suspend fun load(): ResourceMediatorResponse {
 
-        if (cacheData != null && cacheData.isComplete()) return cacheData //TODO make nullcheck more proepr
+        val cacheData : ListAPIResource?
 
         try {
+             cacheData = getConcernedResourceFromDatabase()
+
+            cacheData?.let {
+                if (cacheData.isComplete()) return ResourceMediatorResponse.Success(cacheData)
+            }
+
+
             val itemFromAPI = getConcernedResource() // TODO implement response from API to manage error cases
 
 
@@ -32,17 +38,13 @@ class ResourceRemoteMediator (
                 updateConcernedResource(itemFromAPI)
             }
 
-            return itemFromAPI
+            return ResourceMediatorResponse.Success(itemFromAPI)
 
         } catch (exception: IOException) {
-            //TODO : handle exception
+            return ResourceMediatorResponse.Error("An exception occurred.", exception)
         } catch (exception: HttpException) {
-
+            return ResourceMediatorResponse.Error("HHTP error: " + exception.message(), exception)
         }
-
-        return cacheData
-
-
     }
 
 

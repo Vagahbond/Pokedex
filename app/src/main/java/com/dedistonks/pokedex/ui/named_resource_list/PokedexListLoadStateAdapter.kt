@@ -9,6 +9,7 @@ import androidx.paging.LoadStateAdapter
 class PokedexListLoadStateAdapter(
     private val retry: () -> Unit
 ) : LoadStateAdapter<PokedexListLoadStateViewHolder>() {
+
     override fun onBindViewHolder(holder: PokedexListLoadStateViewHolder, loadState: LoadState) {
         holder.bind(loadState)
     }
@@ -19,4 +20,5 @@ class PokedexListLoadStateAdapter(
     ): PokedexListLoadStateViewHolder {
         return PokedexListLoadStateViewHolder.create(parent, retry)
     }
+
 }

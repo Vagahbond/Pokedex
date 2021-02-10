@@ -2,6 +2,7 @@ package com.dedistonks.pokedex.ui.items
 
 import android.content.ClipData
 import android.graphics.Bitmap
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -93,6 +94,9 @@ class ItemDetailFragment : Fragment() {
                 setImageToComponent(binding.ivItem, bitmap)
             }
         }
+
+        binding.clItemDetailWrapper.visibility = View.VISIBLE
+        binding.flLoading.visibility = View.GONE
     }
 
     companion object {
