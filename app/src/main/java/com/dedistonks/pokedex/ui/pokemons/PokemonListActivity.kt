@@ -1,6 +1,7 @@
 package com.dedistonks.pokedex.ui.pokemons
 
 import android.os.Bundle
+import android.util.Log
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -92,7 +93,7 @@ class PokemonListActivity : AppCompatActivity() {
 
         initRefresh(pokemonsList)
 
-        binding.retryButton.setOnClickListener { adapter.retry() }
+        binding.btPokemonListRetry.setOnClickListener { adapter.retry() }
 
 //        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -120,8 +121,12 @@ class PokemonListActivity : AppCompatActivity() {
 
         adapter.addLoadStateListener { loadState ->
             list.isVisible = loadState.source.refresh is LoadState.NotLoading
-            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-            binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+            binding.pgPokemonList.isVisible = loadState.source.refresh is LoadState.Loading
+            binding.btPokemonListRetry.isVisible = loadState.source.refresh is LoadState.Error
+
+            Log.d(this.javaClass.name, "Current list adapter state is ${loadState.source.refresh}")
+            Log.d(this.javaClass.name, "progressbar's visible is supposed to be :  ${loadState.source.refresh is LoadState.Loading}")
+            Log.d(this.javaClass.name, "retry button's visible is supposed to be :  ${loadState.source.refresh is LoadState.Error}")
 
             val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
@@ -136,12 +141,12 @@ class PokemonListActivity : AppCompatActivity() {
                 ).show()
 
             }
+
         }
     }
 
     private fun initRefresh(list: RecyclerView) {
         // Scroll to top when the list is refreshed from network.
-
 
         lifecycleScope.launch {
             adapter.loadStateFlow
@@ -152,74 +157,4 @@ class PokemonListActivity : AppCompatActivity() {
                     .collect { list.scrollToPosition(0) }
         }
     }
-
-
-//    class PokemonRecyclerViewAdapter(private val parentActivity: PokemonListActivity,
-//                                     private val twoPane: Boolean) :
-//            PagedListAdapter<NamedApiResource, PokemonRecyclerViewAdapter.ViewHolder>(DIFF_CALLBACK) {
-//
-//        private val onClickListener: View.OnClickListener
-//
-//        private var values = listOf<NamedApiResource>()
-//
-//        init {
-//
-//            onClickListener = View.OnClickListener { v ->
-//                val item = v.tag as NamedApiResource
-//                if (twoPane) {
-//                    val fragment = PokemonDetailFragment().apply {
-//                        arguments = Bundle().apply {
-//                            putInt(PokemonDetailFragment.ARG_ITEM_ID, item.id)
-//                        }
-//                    }
-//                    parentActivity.supportFragmentManager
-//                            .beginTransaction()
-//                            .replace(R.id.pokemon_detail_container, fragment)
-//                            .commit()
-//                } else {
-//                    val intent = Intent(v.context, PokemonDetailActivity::class.java).apply {
-//                        putExtra(PokemonDetailFragment.ARG_ITEM_ID, item.id)
-//                    }
-//                    v.context.startActivity(intent)
-//                }
-//            }
-//        }
-//
-//        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//            val view = LayoutInflater.from(parent.context)
-//                    .inflate(R.layout.pokemon_list_content, parent, false)
-//            return ViewHolder(view)
-//        }
-//
-//        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//            val item = getItem(position)
-//            holder.idView.text = item?.id.toString()
-//            holder.contentView.text = item?.name
-//
-//            with(holder.itemView) {
-//                tag = item
-//                setOnClickListener(onClickListener)
-//            }
-//        }
-//
-//        override fun getItemCount() = values.size
-//
-//        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//            val idView: TextView = view.findViewById(R.id.id_text)
-//            val contentView: TextView = view.findViewById(R.id.content)
-//        }
-//
-//
-//        companion object {
-//            private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NamedApiResource>() {
-//                override fun areItemsTheSame(oldItem: NamedApiResource, newItem: NamedApiResource): Boolean {
-//                    return oldItem.id == newItem.id
-//                }
-//
-//                override fun areContentsTheSame(oldItem: NamedApiResource, newItem: NamedApiResource): Boolean {
-//                    return oldItem.id == newItem.id
-//                }
-//            }
-//        }
-//    }
 }

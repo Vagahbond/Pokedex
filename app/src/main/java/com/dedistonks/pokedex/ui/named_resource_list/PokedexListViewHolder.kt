@@ -36,7 +36,7 @@ class PokedexListViewHolder(
 
     init {
         view.setOnClickListener { v ->
-            Log.d(this.javaClass.name, "Constructor ran.")
+            //Log.d(this.javaClass.name, "Constructor ran.")
 
             if (twoPane) {
                 val fragment = when (item) {

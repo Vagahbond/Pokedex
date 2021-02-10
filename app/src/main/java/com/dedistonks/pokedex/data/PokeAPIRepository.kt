@@ -25,7 +25,7 @@ class PokeAPIRepository(
 
         @ExperimentalPagingApi
         fun getPokemonsStream(): Flow<PagingData<ListAPIResource>> {
-                Log.d("PokeAPIRepository", "querying all the pokemons.")
+                Log.d(this.javaClass.name, "querying all the pokemons.")
 
                 @Suppress("UNCHECKED_CAST") val pagingSourceFactory = { database.pokemonDao().getAll() as PagingSource<Int, ListAPIResource> }
 
@@ -68,16 +68,16 @@ class PokeAPIRepository(
         }
 
 
-        suspend fun getPokemon(index: Int) : Pokemon {
+        suspend fun getPokemon(index: Int) : ResourceMediatorResponse {
                 Log.d("PokeAPIRepository", "querying pokemon at index ${index}.")
 
-                return ResourceRemoteMediator(service, database, ListContentType.POKEMON, index).load() as Pokemon
+                return ResourceRemoteMediator(service, database, ListContentType.POKEMON, index).load()
         }
 
-        suspend fun getItem(index: Int): Item {
+        suspend fun getItem(index: Int): ResourceMediatorResponse {
                 Log.d("PokeAPIRepository", "querying item at index ${index}.")
 
-                return ResourceRemoteMediator(service, database, ListContentType.ITEM, index).load() as Item
+                return ResourceRemoteMediator(service, database, ListContentType.ITEM, index).load()
         }
 }
 
