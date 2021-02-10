@@ -38,8 +38,6 @@ class PokemonDetailFragment : Fragment() {
 
     private var loadJob: Job? = null
 
-    private var twoPane: Boolean = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +53,6 @@ class PokemonDetailFragment : Fragment() {
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                     load(it.getInt(ARG_ITEM_ID))
-                twoPane = it.getBoolean(TWO_PANE_ITEM_ID)
             }
         }
 
@@ -65,8 +62,11 @@ class PokemonDetailFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View {
 
         binding = PokemonDetailBinding.inflate(layoutInflater)
 

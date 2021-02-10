@@ -22,7 +22,8 @@ class PokeAPI {
     }
 
     suspend fun getItem(id: Int): Item = withContext(Dispatchers.IO) {
-            ItemAdapter.adapt(api.getItem(id))
+        Log.d(this.javaClass.name, "fetching item $id.")
+        ItemAdapter.adapt(api.getItem(id))
     }
 
     suspend fun getPokemons(offset: Int = 0, limit: Int = 5) = withContext(Dispatchers.IO) {
