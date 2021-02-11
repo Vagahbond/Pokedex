@@ -10,23 +10,25 @@
         android:id="@+id/clItemDetailWrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone">
-
 
 
         <ImageView
             android:id="@+id/ivItem"
             android:layout_width="250dp"
             android:layout_height="250dp"
+            android:background="@drawable/rounded_background"
+            android:contentDescription="@string/item"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@+id/llItemCategory"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/item"/>
-
-
+            tools:src="@tools:sample/avatars" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,11 +50,10 @@
                 android:text="@string/unloaded_data"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/tvItemCategory"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -72,7 +73,7 @@
 
         <TextView
             android:id="@+id/tvItemDescription"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/unloaded_data"
             android:textAlignment="center"
@@ -81,12 +82,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/llItemCategory" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <FrameLayout
         android:id="@+id/flLoading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/tvItemDetailError"
+            android:visibility="gone">
+        </TextView>
+
         <ProgressBar
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyle"

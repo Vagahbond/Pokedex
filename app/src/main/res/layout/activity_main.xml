@@ -6,21 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <TextView
         android:id="@+id/twWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_message"
-        app:layout_constraintBottom_toTopOf="@id/btPokemons"
+        app:layout_constraintBottom_toTopOf="@id/ivPokedex"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivPokedex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/pokedex"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btPokemons"
+        app:layout_constraintTop_toBottomOf="@id/twWelcome"/>
+
     <Button
         android:id="@+id/btPokemons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_pokemon_list"
-        app:layout_constraintTop_toBottomOf="@id/twWelcome"
+        app:layout_constraintTop_toBottomOf="@id/ivPokedex"
         app:layout_constraintBottom_toTopOf="@id/btObjects"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

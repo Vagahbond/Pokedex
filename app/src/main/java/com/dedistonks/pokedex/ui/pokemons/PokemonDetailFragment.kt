@@ -2,6 +2,7 @@ package com.dedistonks.pokedex.ui.pokemons
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.dedistonks.pokedex.ui.simple_list.SimpleItemRecyclerAdapter
 import com.dedistonks.pokedex.utils.ImageToBitmap
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 /**
  * A fragment representing a single Pokemon detail screen.
@@ -57,7 +59,17 @@ class PokemonDetailFragment : Fragment() {
         }
 
         viewModel.currentPokemonResult.observe(this,) {
-            bindPokemon(it)
+            (it as Pokemon?)?.let {
+                bindPokemon(it)
+            }
+
+        }
+
+        viewModel.error.observe(this) {
+            (it as String?)?.let {
+                bindError(it)
+            }
+
         }
 
     }
@@ -96,12 +108,12 @@ class PokemonDetailFragment : Fragment() {
         binding.tvHeight.text = getString(R.string.height_property, pokemon.height?.times(10))
 
         if (pokemon.abilities.isNotEmpty()) binding.tvAbility3.text = pokemon.abilities[0]
-        if (pokemon.abilities.size >= 2) binding.tvAbility2.text = pokemon.abilities[1]
-        if (pokemon.abilities.size >= 3) binding.tvAbility1.text = pokemon.abilities[2]
+        if (pokemon.abilities.size >= 2) binding.tvAbility2.text = pokemon.abilities[1] else binding.tvAbility2.visibility = View.GONE
+        if (pokemon.abilities.size >= 3) binding.tvAbility1.text = pokemon.abilities[2] else binding.tvAbility3.visibility = View.GONE
 
 
         if (pokemon.types.isNotEmpty()) binding.tvType2.text = pokemon.types[0]
-        if (pokemon.types.size >= 2) binding.tvType1.text = pokemon.types[1]
+        if (pokemon.types.size >= 2) binding.tvType1.text = pokemon.types[1] else binding.tvType1.visibility = View.GONE
 
         context?.let {
             binding.rvGames.layoutManager = SimpleItemRecyclerAdapter.getHorizontalLayoutManager(it)
@@ -142,8 +154,21 @@ class PokemonDetailFragment : Fragment() {
             }
         }
 
-        binding.clPokemonDetailWrapper.visibility = View.VISIBLE
+        binding.retryButton.visibility = View.GONE
         binding.flLoading.visibility = View.GONE
+        binding.tvPokemonDetailError.visibility = View.GONE
+        binding.clPokemonDetailWrapper.visibility = View.VISIBLE
+
+    }
+
+    private fun bindError(message: String) {
+        binding.clPokemonDetailWrapper.visibility = View.GONE
+        binding.flLoading.visibility = View.GONE
+
+        binding.retryButton.visibility = View.VISIBLE
+
+        binding.tvPokemonDetailError.visibility = View.VISIBLE
+        binding.tvPokemonDetailError.text = message
     }
 
     companion object {

@@ -16,10 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clPokemonDetailWrapper"
             android:layout_width="match_parent"
@@ -44,55 +40,71 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-
                     <ImageView
                         android:id="@+id/ivPokemonFront"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
                         android:contentDescription="@string/pokemon_from_back"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toTopOf="@id/ivPokemonShinyFront"
                         app:layout_constraintEnd_toStartOf="@+id/ivPokemonBack"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:srcCompat="@tools:sample/avatars"
-                        android:scaleType="centerCrop"/>
+                        />
 
                     <ImageView
                         android:id="@+id/ivPokemonBack"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
                         android:contentDescription="@string/pokemon_from_front"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toTopOf="@id/ivPokemonShinyBack"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/ivPokemonFront"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:scaleType="centerCrop"/>
+                        tools:srcCompat="@tools:sample/avatars" />
 
 
                     <ImageView
                         android:id="@+id/ivPokemonShinyFront"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
                         android:contentDescription="@string/pokemon_from_front"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/ivPokemonShinyBack"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/ivPokemonFront"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:scaleType="centerCrop"/>
+                        tools:srcCompat="@tools:sample/avatars" />
 
                     <ImageView
                         android:id="@+id/ivPokemonShinyBack"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
                         android:contentDescription="@string/pokemon_from_back"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/ivPokemonShinyFront"
                         app:layout_constraintTop_toBottomOf="@id/ivPokemonBack"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:scaleType="centerCrop"/>
+                        tools:srcCompat="@tools:sample/avatars" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -116,22 +128,27 @@
 
                     <TextView
                         android:id="@+id/twName"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/unloaded_data"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/twID"
-                        app:layout_constraintHorizontal_bias="0.85"
+                        app:layout_constraintHorizontal_bias="0.96"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:padding="5dp"/>
 
                     <TextView
                         android:id="@+id/twID"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="@string/unloaded_data"
+                        android:textAlignment="viewEnd"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/twName"
@@ -161,6 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="@string/unloaded_data"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/tvDetails"
@@ -212,10 +230,13 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:src="@android:drawable/ic_dialog_alert"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/tvType2"
                         app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/rounded_background"
+                        android:padding="5dp"/>
 
                     <TextView
                         android:id="@+id/tvType2"
@@ -224,13 +245,16 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:src="@android:drawable/ic_dialog_alert"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/tvType1"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/rounded_background"
+                        android:padding="5dp"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/layoutCapacities"
@@ -263,10 +287,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/tvAbility2"
                         app:layout_constraintStart_toEndOf="@id/tvAbilityLabel"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/rounded_background"
+                        android:padding="5dp"/>
 
                     <TextView
                         android:id="@+id/tvAbility2"
@@ -274,10 +301,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/tvAbility3"
                         app:layout_constraintStart_toEndOf="@id/tvAbility1"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/rounded_background"
+                        android:padding="5dp"/>
 
                     <TextView
                         android:id="@+id/tvAbility3"
@@ -285,10 +315,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAbility2"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/rounded_background"
+                        android:padding="5dp"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
@@ -340,16 +374,16 @@
                 android:id="@+id/layoutEvolutions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layoutGames"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
 
                     <TextView
@@ -395,6 +429,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/tvPokemonDetailError"
+            android:visibility="gone">
+        </TextView>
 
         <ProgressBar
             android:id="@+id/progress_bar"

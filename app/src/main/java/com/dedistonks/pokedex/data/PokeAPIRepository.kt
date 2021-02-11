@@ -29,9 +29,6 @@ class PokeAPIRepository(
 
                 @Suppress("UNCHECKED_CAST") val pagingSourceFactory = { database.pokemonDao().getAll() as PagingSource<Int, ListAPIResource> }
 
-
-
-
                 return Pager(
                         config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
                         remoteMediator = ListRemoteMediator(
@@ -41,20 +38,13 @@ class PokeAPIRepository(
                         ),
                         pagingSourceFactory = pagingSourceFactory
                 ).flow
-
         }
-
-
-
 
         @ExperimentalPagingApi
         fun getItemsStream(): Flow<PagingData<ListAPIResource>> {
                 Log.d("PokeAPIRepository", "querying all the items.")
 
                 @Suppress("UNCHECKED_CAST") val pagingSourceFactory = { database.itemDao().getAll() as PagingSource<Int, ListAPIResource> }
-
-
-
 
                 return Pager(
                         config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
@@ -66,7 +56,6 @@ class PokeAPIRepository(
                         pagingSourceFactory = pagingSourceFactory
                 ).flow
         }
-
 
         suspend fun getPokemon(index: Int) : ResourceMediatorResponse {
                 Log.d("PokeAPIRepository", "querying pokemon at index ${index}.")

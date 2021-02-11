@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         navToObjectsButton.setOnClickListener{
             val intent = Intent(this, ItemListActivity::class.java)
+
             startActivity(intent)
         }
     }
