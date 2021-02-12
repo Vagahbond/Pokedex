@@ -169,6 +169,7 @@ class PokemonDetailFragment : Fragment() {
 
         binding.tvPokemonDetailError.visibility = View.VISIBLE
         binding.tvPokemonDetailError.text = message
+
     }
 
     companion object {

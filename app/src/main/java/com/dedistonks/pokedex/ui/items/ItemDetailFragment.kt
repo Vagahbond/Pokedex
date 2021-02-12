@@ -105,6 +105,7 @@ class ItemDetailFragment : Fragment() {
             }
         }
 
+
         binding.retryButton.visibility = View.GONE
         binding.tvItemDetailError.visibility = View.GONE
         binding.flLoading.visibility = View.GONE
@@ -119,6 +120,7 @@ class ItemDetailFragment : Fragment() {
 
         binding.tvItemDetailError.visibility = View.VISIBLE
         binding.tvItemDetailError.text = message
+
     }
 
     companion object {

@@ -124,6 +124,7 @@ class PokemonListActivity : AppCompatActivity() {
             binding.pgPokemonList.isVisible = loadState.source.refresh is LoadState.Loading
             binding.btPokemonListRetry.isVisible = loadState.source.refresh is LoadState.Error
 
+
             val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error

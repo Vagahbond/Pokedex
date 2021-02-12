@@ -17,6 +17,7 @@ class PokemonDetailViewModel(
     var error = MutableLiveData<String>()
 
 
+
     var currentPokemonResult =  MutableLiveData<Pokemon>()
 
 

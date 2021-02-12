@@ -57,6 +57,7 @@ class PokeAPIRepository(
                 ).flow
         }
 
+
         suspend fun getPokemon(index: Int) : ResourceMediatorResponse {
                 Log.d("PokeAPIRepository", "querying pokemon at index ${index}.")
 
