@@ -12,7 +12,7 @@ object ItemAdapter : Adapter<me.sargunvohra.lib.pokekotlin.model.Item, Item> {
                     else source.name,
                 category = source.category.name,
                 effects = source.effectEntries.map { effectEntry -> effectEntry.shortEffect },
-                description = source.flavorTextEntries[0].text,
+                description = source.flavorTextEntries.find { description -> description.language.name == "en" }?.text,
                 spriteUrl = source.sprites.default
             )
     }

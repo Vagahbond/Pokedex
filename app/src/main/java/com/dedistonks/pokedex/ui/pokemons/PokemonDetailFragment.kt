@@ -108,12 +108,23 @@ class PokemonDetailFragment : Fragment() {
         binding.tvHeight.text = getString(R.string.height_property, pokemon.height?.times(10))
 
         if (pokemon.abilities.isNotEmpty()) binding.tvAbility3.text = pokemon.abilities[0]
-        if (pokemon.abilities.size >= 2) binding.tvAbility2.text = pokemon.abilities[1] else binding.tvAbility2.visibility = View.GONE
-        if (pokemon.abilities.size >= 3) binding.tvAbility1.text = pokemon.abilities[2] else binding.tvAbility3.visibility = View.GONE
+
+        if (pokemon.abilities.size >= 2)  {
+            binding.tvAbility2.visibility = View.VISIBLE
+            binding.tvAbility2.text = pokemon.abilities[1]
+        } else binding.tvAbility2.visibility = View.GONE
+
+        if (pokemon.abilities.size >= 3) {
+            binding.tvAbility1.visibility = View.VISIBLE
+            binding.tvAbility1.text = pokemon.abilities[2]
+        } else binding.tvAbility1.visibility = View.GONE
 
 
         if (pokemon.types.isNotEmpty()) binding.tvType2.text = pokemon.types[0]
-        if (pokemon.types.size >= 2) binding.tvType1.text = pokemon.types[1] else binding.tvType1.visibility = View.GONE
+        if (pokemon.types.size >= 2) {
+            binding.tvType1.visibility = View.VISIBLE
+            binding.tvType1.text = pokemon.types[1]
+        } else binding.tvType1.visibility = View.GONE
 
         context?.let {
             binding.rvGames.layoutManager = SimpleItemRecyclerAdapter.getHorizontalLayoutManager(it)
