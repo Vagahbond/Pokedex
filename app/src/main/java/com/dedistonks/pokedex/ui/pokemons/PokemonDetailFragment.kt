@@ -178,28 +178,4 @@ class PokemonDetailFragment : Fragment() {
     }
 
 
-//    class AbilitiesRecyclerViewAdapter(private val values: List<String>) :
-//            RecyclerView.Adapter<AbilitiesRecyclerViewAdapter.ViewHolder>() {
-//
-//
-//        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//            val view = LayoutInflater.from(parent.context)
-//                    .inflate(R.layout.abilities_list_content, parent, false)
-//
-//            return ViewHolder(view)
-//        }
-//
-//        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//            val item = values[position]
-//            holder.tvName.text = item
-//            Log.d("Ability" , item)
-//        }
-//
-//        override fun getItemCount() = values.size
-//
-//        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//            val tvName: TextView = view.findViewById(R.id.tvAbilityName)
-//        }
-//    }
-
 }
