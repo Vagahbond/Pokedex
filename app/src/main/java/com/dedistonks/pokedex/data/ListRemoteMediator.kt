@@ -39,14 +39,16 @@ class ListRemoteMediator (
                 val remoteKey = state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.id?.div(state.config.pageSize)
                 remoteKey ?: throw InvalidObjectException("Remote key and the prevKey should not be null")
 
-                remoteKey.minus(1 )
+                remoteKey.minus(1 * state.config.pageSize)
 
             }
             LoadType.APPEND -> {
                 val remoteKeys = state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.id?.div(state.config.pageSize)
                 remoteKeys ?: throw InvalidObjectException("Remote key should not be null for $loadType")
 
+
                 remoteKeys.plus(1)
+
             }
 
         }
