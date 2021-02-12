@@ -46,7 +46,9 @@ class ListRemoteMediator (
                 val remoteKeys = state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.id?.div(state.config.pageSize)
                 remoteKeys ?: throw InvalidObjectException("Remote key should not be null for $loadType")
 
-                remoteKeys.plus(1 * state.config.pageSize)
+
+                remoteKeys.plus(1)
+
             }
 
         }
@@ -90,8 +92,9 @@ class ListRemoteMediator (
     }
 
     private suspend fun getConcernedResource(page : Int, pageSize: Int): List<ListAPIResource> {
-        Log.d(this.javaClass.name, "Querying from API $pageSize $resourceType from $page on")
         val offset = page * pageSize
+        Log.d(this.javaClass.name, "Querying from API $pageSize $resourceType from $offset on")
+
 
         return when(resourceType) {
             ListContentType.POKEMON -> service.getPokemons(offset, pageSize)

@@ -124,9 +124,6 @@ class PokemonListActivity : AppCompatActivity() {
             binding.pgPokemonList.isVisible = loadState.source.refresh is LoadState.Loading
             binding.btPokemonListRetry.isVisible = loadState.source.refresh is LoadState.Error
 
-            Log.d(this.javaClass.name, "Current list adapter state is ${loadState.source.refresh}")
-            Log.d(this.javaClass.name, "progressbar's visible is supposed to be :  ${loadState.source.refresh is LoadState.Loading}")
-            Log.d(this.javaClass.name, "retry button's visible is supposed to be :  ${loadState.source.refresh is LoadState.Error}")
 
             val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error

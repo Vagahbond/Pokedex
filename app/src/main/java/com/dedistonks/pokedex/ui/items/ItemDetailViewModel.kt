@@ -13,7 +13,9 @@ class ItemDetailViewModel(
 
     private var selectedIndex: Int = 0
 
-    private var error = MutableLiveData<String>()
+
+    var error = MutableLiveData<String>()
+
 
     var currentItemResult =  MutableLiveData<Item>()
 

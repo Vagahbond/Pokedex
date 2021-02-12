@@ -79,7 +79,7 @@ class ItemListActivity : AppCompatActivity() {
         itemList.addItemDecoration(decoration)
 
 
-
+        title = "Items"
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.title = title

@@ -14,7 +14,9 @@ class PokemonDetailViewModel(
 
     private var selectedIndex: Int = 0
 
-    private var error = MutableLiveData<String>()
+    var error = MutableLiveData<String>()
+
+
 
     var currentPokemonResult =  MutableLiveData<Pokemon>()
 

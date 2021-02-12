@@ -52,7 +52,17 @@ class ItemDetailFragment : Fragment() {
         }
 
         viewModel.currentItemResult.observe(this,) {
-            bindItem(it)
+            (it as Item?)?.let {
+                bindItem(it)
+            }
+
+        }
+
+        viewModel.error.observe(this,) {
+            (it as String?)?.let {
+                bindError(it)
+            }
+
         }
     }
 
@@ -95,8 +105,22 @@ class ItemDetailFragment : Fragment() {
             }
         }
 
-        binding.clItemDetailWrapper.visibility = View.VISIBLE
+
+        binding.retryButton.visibility = View.GONE
+        binding.tvItemDetailError.visibility = View.GONE
         binding.flLoading.visibility = View.GONE
+        binding.clItemDetailWrapper.visibility = View.VISIBLE
+    }
+
+    private fun bindError(message: String) {
+        binding.clItemDetailWrapper.visibility = View.GONE
+        binding.flLoading.visibility = View.GONE
+
+        binding.retryButton.visibility = View.VISIBLE
+
+        binding.tvItemDetailError.visibility = View.VISIBLE
+        binding.tvItemDetailError.text = message
+
     }
 
     companion object {
