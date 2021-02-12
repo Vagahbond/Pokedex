@@ -126,6 +126,7 @@ class PokemonDetailFragment : Fragment() {
             binding.tvType1.text = pokemon.types[1]
         } else binding.tvType1.visibility = View.GONE
 
+
         context?.let {
             binding.rvGames.layoutManager = SimpleItemRecyclerAdapter.getHorizontalLayoutManager(it)
             binding.rvGames.addItemDecoration(SimpleItemRecyclerAdapter.getSeparator(it))
